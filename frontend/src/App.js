@@ -1,9 +1,10 @@
 import React from 'react';
 import MyNavbar from "./Components/MyNavbar";
-import News from './Components/Tabs/News';
+import News from './Components/News';
 import Currency from "./Components/Currency";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
+import Administration from "./Components/Administration"
 import {Route, BrowserRouter, Switch} from 'react-router-dom';
 
 
