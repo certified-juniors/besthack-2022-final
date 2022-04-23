@@ -11,6 +11,8 @@ class User {
         this.created_at = created_at;
         this.role = role;
         this.balance = 0;
+        this.blocked = false;
+        this.tries = 0;
     }
 }
 
