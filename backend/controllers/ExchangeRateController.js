@@ -34,11 +34,11 @@ class ExchangeRateController {
         const currencies = Object.keys(new User(0, 0, 0, 0, 0).balance) ;
         const promises = currencies.map(async currency => {
             console.log(currency);
-            const price = parser_currency(currency)
+            const price = await parser_currency(currency)
             return {[currency]: price};
         });
         const values = await Promise.all(promises);
-        
+        console.log(values);
 
         this.lastUpdate = new Date().getTime();
         return this.lastUpdate;

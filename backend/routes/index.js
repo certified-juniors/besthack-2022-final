@@ -3,11 +3,10 @@ const router = express.Router();
 const userController = require('../controllers/UserController');
 const { check } = require("express-validator");
 const [parser, parser_currency] = require('../utils/parser');
+const exchangeController = require('../controllers/ExchangeRateController');
 
 router.route('/').get(async (req, res) => {
-
-  console.log(await parser_currency('RUB'))
-
+  exchangeController.updateExchangeRate();
   return res
     .status(200)
     .send(`<h1>hello</h1>`)
