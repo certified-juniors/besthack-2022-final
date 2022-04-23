@@ -3,13 +3,6 @@ import {Button, Container, Card, Row, Col} from "react-bootstrap";
 import Currency from "./Currency";
 import ModalButton from "./ModalButton";
 
-/*import China from '/frontend/src/flags/China.jpg'
-import EU from '/frontend/src/flags/EU.jpg'
-import GB from '/frontend/src/flags/GB.jpg'
-import Rus from './flags/Rus.jpg'
-import Switzerland from './flags/Switzerland.jpg'
-import US from './flags/US.jpg'*/
-
 
 
 const CurrencyList = (massCurrency) => {

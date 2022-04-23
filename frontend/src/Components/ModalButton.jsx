@@ -22,6 +22,7 @@ function ModalButton() {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Количество</Form.Label>
               <Form.Control
+                id = "amount"
                 type="number"
                 placeholder="0"
                 autoFocus
