@@ -12,22 +12,23 @@ const App = () => {
     return (
         <BrowserRouter>
             <MyNavbar />
+            <Administration />
             <Switch>
-                <Route exact path="/">
-                    <News />
-                </Route>
-                <Route path="/currency">
-                    <Currency />
-                </Route>
-                {/*<Route path="/profile">*/}
-                {/*    <Profile />*/}
+                {/*<Route exact path="/">*/}
+                {/*    <News />*/}
                 {/*</Route>*/}
-                <Route path="/login">
-                    <Login />
-                </Route>
-                <Route path="/register">
-                    <Register />
-                </Route>
+                {/*<Route path="/currency">*/}
+                {/*    <Currency />*/}
+                {/*</Route>*/}
+                {/*/!*<Route path="/profile">*!/*/}
+                {/*/!*    <Profile />*!/*/}
+                {/*/!*</Route>*!/*/}
+                {/*<Route path="/login">*/}
+                {/*    <Login />*/}
+                {/*</Route>*/}
+                {/*<Route path="/register">*/}
+                {/*    <Register />*/}
+                {/*</Route>*/}
             </Switch>
         </BrowserRouter>
     )
