@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Card, Container, Row} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 import {useState} from "react";
 import CurrencyList from "./CurrencyList";
 
@@ -44,7 +44,7 @@ const Currency = () =>
 
      <Card>
        <Card.Body>
-         <Card.Title>{card.img}{card.title}</Card.Title>
+         <Card.Title>{card.title}</Card.Title>
          <Card.text>{card.text}</Card.text>
        </Card.Body>
 
