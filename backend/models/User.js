@@ -5,7 +5,6 @@ class User {
         CLIENT: 'client',
     };
     constructor(id, login, email, hashed_password, created_at, role) {
-        this.id = id;
         this.login = login;
         this.email = email;
         this.hashed_password = hashed_password;
@@ -13,7 +12,6 @@ class User {
         this.role = role;
     }
     constructor(json) {
-        this.id = json.id;
         this.login = json.login;
         this.email = json.email;
         this.hashed_password = json.hashed_password;

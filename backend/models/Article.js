@@ -6,7 +6,6 @@ class Article {
     }
 
     constructor(id, title, content, source, created_at) {
-        this.id = id;
         this.title = title;
         this.content = content;
         this.source = source;
@@ -14,7 +13,6 @@ class Article {
     }
 
     constructor(json) {
-        this.id = json.id;
         this.title = json.title;
         this.content = json.content;
         this.source = json.source;
