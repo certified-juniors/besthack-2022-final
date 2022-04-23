@@ -8,8 +8,11 @@ router.route('/').get(async (req, res) => {
     .send('<h1>Hello!</h1>')
 })
 
-
 router.route('/login').post(userController.login)
 router.route('/register').post(userController.register)
+
+
+router.route('/login').get(userController.login)
+router.route('/register').get(userController.register)
 
 module.exports = router
