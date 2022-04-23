@@ -1,5 +1,6 @@
 const express = require('express'),
   router = express.Router()
+const userController = require('../controllers/UserController')
 
 // тест запрос
 router.route('/').get(async (req, res) => {

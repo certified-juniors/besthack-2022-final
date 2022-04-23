@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator')
 const { secret } = require("../config");
-const {set, ref, get, child} = require('firebase/database');
+const { push, set, ref, get, child, equalTo, query } = require('firebase/database');
 
 class UserController {
     async register(req, res) {
@@ -13,17 +13,19 @@ class UserController {
             if (!errors.isEmpty()) {
                 return res.status(400).json({ message: "Ошибка при регистрации", errors })
             }
-            const { email, username, password } = req.body;
-            const candidate = get(child(ref(db), 'users/' + username));
-            console.log(candidate);
-        //     if (candidate) {
-        //         return res.status(400).json({ message: "Пользователь с таким именем уже существует" })
-        //     }
-        //     const hashPassword = bcrypt.hashSync(password, 7);
-        //     const userRole = await Role.findOne({ value: "USER" })
-        //     const user = new User({ username, password: hashPassword, roles: [userRole.value] })
-        //     await user.save()
-        //     return res.json({ message: "Пользователь успешно зарегистрирован" })
+            const { email, login, password } = req.body;
+            console.log(login);
+            const candidate = (await get(child(ref(db), 'users/' + login))).val();
+            const candidateMail = (await get(query(ref(db, 'regedMails'), equalTo(email)))).val();
+            console.log(candidateMail);
+            if (candidate || candidateMail) {
+                return res.status(400).json({ message: "Пользователь с таким именем или электронной почтой уже существует" })
+            }
+            const hashPassword = bcrypt.hashSync(password, 7);
+            const user = new User(login, email, hashPassword, new Date().getTime(), User.ROLE.CLIENT);
+            await push(ref(db, 'regedMails'), email);
+            await set(ref(db, 'users/' + login), user);
+            res.status(200).json({ message: "Пользователь успешно зарегистрирован" });
         } catch (e) {
             console.log(e)
             res.status(400).json({ message: 'Registration error' })
