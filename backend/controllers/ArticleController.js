@@ -6,7 +6,7 @@ class ArticleController {
 }
 
 
-class Source { //хочу напакостить
+class Source {
     constructor(interval, name) {
         this.interval = interval;
         this.isEnabled = true;
