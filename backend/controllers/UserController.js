@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 const md5 = require('md5');
 const { validationResult } = require('express-validator')
 const { secret } = require("../config");
-const { push, set, ref, get, child, equalTo, query, orderByValue } = require('firebase/database');
+const { push, set, ref, get, child, equalTo, query, orderByValue, onValue } = require('firebase/database');
+const { logRegister, logLogin } = require('./EntryController');
 
 class UserController {
     async register(req, res) {
@@ -29,6 +30,7 @@ class UserController {
             const user = new User(login, email, hashPassword, new Date().getTime(), User.ROLE.CLIENT);
             await set(ref(db, "loginbyemail/" + hashed_email), login);
             await set(ref(db, 'users/' + login), user);
+            logRegister(user, req);
             res.status(200).json({ message: "Пользователь успешно зарегистрирован" });
         } catch (e) {
             console.log(e)
@@ -40,27 +42,32 @@ class UserController {
         try {
             const { loginOrEmail, password } = req.body;
             const isLogin = loginOrEmail.indexOf('@') === -1;
-            if (!user) {
-                return res.status(400).json({ message: `Пользователь ${username} не найден` })
+            let login;
+            if (!isLogin) {
+                const hashed_email = md5(loginOrEmail);
+                login = (await get(child(ref(db), "loginbyemail/" + hashed_email))).val();
+                if (!login) return res.status(400).json({ message: "Пользователь с такой почтой не зарегистрирован" })
+            } else {
+                login = loginOrEmail;
             }
-            const validPassword = bcrypt.compareSync(password, user.password)
-            if (!validPassword) {
-                return res.status(400).json({ message: `Введен неверный пароль` })
+            const user = (await get(child(ref(db), 'users/' + login))).val();
+            if (!user) return res.status(400).json({ message: "Пользователь с таким именем не зарегистрирован" })
+            if (user.blocked) return res.status(400).json({ message: "Пользователь заблокирован" });
+            const isPasswordValid = bcrypt.compareSync(password, user.hashed_password);
+            if (!isPasswordValid) { 
+                set(ref(db, 'users/' + login), { tries: user.tries + 1 });
+                if (user.tries > 5) {
+                    set(ref(db, 'users/' + login), { blocked: true });
+                    return res.status(400).json({ message: "Пользователь заблокирован" });
+                }
+                return res.status(400).json({ message: "Неверный пароль" })
             }
-            const token = generateAccessToken(user._id, user.roles)
-            return res.json({ token })
+            const token = jwt.sign({ login }, secret, { expiresIn: '30m' });
+            logLogin(user, req);
+            return res.status(200).json({ token });
         } catch (e) {
             console.log(e)
             res.status(400).json({ message: 'Login error' })
-        }
-    }
-
-    async getUsers(req, res) {
-        try {
-            const users = await User.find()
-            res.json(users)
-        } catch (e) {
-            console.log(e)
         }
     }
 }
