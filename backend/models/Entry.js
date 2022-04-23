@@ -23,3 +23,5 @@ class Entry {
         this.data = json.data;
     }
 }
+
+module.exports = Entry;
