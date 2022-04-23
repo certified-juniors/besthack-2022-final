@@ -2,11 +2,15 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/UserController');
 const { check } = require("express-validator");
+const [parser, parser_currency] = require('../utils/parser');
 
 router.route('/').get(async (req, res) => {
+
+  console.log(await parser_currency('RUB'))
+
   return res
     .status(200)
-    .send('<h1>Hello!</h1>')
+    .send(`<h1>hello</h1>`)
 })
 
 router.route('/login').post(userController.login);
