@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Container} from "react-bootstrap";
 import Form from 'react-bootstrap/Form'
 
+
 const Login = () =>
 {
   return (
@@ -11,7 +12,7 @@ const Login = () =>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicLogin">
           <Form.Label>Введите Логин или Email</Form.Label>
-          <Form.Control type="login" placeholder="Логин" />
+          <Form.Control type="login" placeholder="Логин или почта" />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
