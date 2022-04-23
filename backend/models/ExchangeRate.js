@@ -4,9 +4,4 @@ class ExchangeRate {
         this.rate = rate; // float to RUB
         this.timestamp = timestamp;
     }
-    constructor(json) {
-        this.currency = json.currency;
-        this.rate = json.rate;
-        this.created_at = json.created_at;
-    }
 }
