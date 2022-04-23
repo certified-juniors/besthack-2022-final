@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Container, Card, Col, Row, Pagination, Modal} from "react-bootstrap";
-import News from "./News";
-import {render} from "react-dom";
+import {Container, Card, Col, Row, Pagination, Modal} from "react-bootstrap";
 
 const NewsList = (massNews) => {
 
@@ -27,6 +25,15 @@ const NewsList = (massNews) => {
 
                     <Col sm = "4">
                         <Container fluid style = {{marginTop: '50px', marginLeft: '50px'}}>
+
+                            <Modal show={show} onHide={handleClose}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>{myNews.title}</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>{myNews.text}</Modal.Body>
+                                <Modal.Footer>{myNews.link}</Modal.Footer>
+                            </Modal>
+
                             <Card onClick = {handleShow} style = {{width: '20em'}}>
 
                                 <Card.Body style = {{marginBottom: '10px'}}>
@@ -41,14 +48,6 @@ const NewsList = (massNews) => {
                                     </Card.Link>
                                 </Card.Body>
                             </Card>
-
-                            <Modal show={show} onHide={handleClose}>
-                                <Modal.Header closeButton>
-                                    <Modal.Title>{myNews.title}</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>{myNews.text}</Modal.Body>
-                                <Modal.Footer>{myNews.link}</Modal.Footer>
-                            </Modal>
 
                         </Container>
                     </Col>))
