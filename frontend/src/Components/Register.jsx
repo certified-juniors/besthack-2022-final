@@ -5,6 +5,10 @@ import Form from 'react-bootstrap/Form'
 
 const Register = () =>
 {
+    function dontGoToLink(e) {
+    e.preventDefault();
+}
+
     return (
         <Container>
          <h2 className='text-center'>Регистрация</h2>
@@ -28,7 +32,7 @@ const Register = () =>
                     <Form.Check type="checkbox" label=
                    "Согласен с условиями пользовательского соглашения"/>
                 </Form.Group>
-                <Button  size = "xxl" variant="primary" type="submit">
+                <Button  onClick={this.dontGoToLink} = "xxl" variant="primary" type="submit">
                     Зарегистрироваться
                 </Button>
             </Form>
