@@ -61,19 +61,10 @@ class UserController {
                 return res.status(400).json({ message: "Неверный пароль" })
             }
             const token = jwt.sign({ login }, secret, { expiresIn: '30m' });
-            return res.status(200).json({ token, user })
+            return res.status(200).json({ token });
         } catch (e) {
             console.log(e)
             res.status(400).json({ message: 'Login error' })
-        }
-    }
-
-    async getUsers(req, res) {
-        try {
-            const users = await User.find()
-            res.json(users)
-        } catch (e) {
-            console.log(e)
         }
     }
 }
