@@ -9,3 +9,6 @@ class User {
         this.is_admin = is_admin;
     }
 }
+
+
+module.exports = User;

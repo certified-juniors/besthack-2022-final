@@ -8,3 +8,11 @@ class Article {
         this.updated_at = updated_at;
     }
 }
+
+class Category extends Enumerator {
+    constructor(id, name, created_at, updated_at) {
+        super(id, name, created_at, updated_at);
+    }
+}
+
+module.exports = Article;
