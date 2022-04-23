@@ -1,28 +1,46 @@
 import React from 'react';
-import {Button, Container, Card} from "react-bootstrap";
+import {Button, Container, Card, Col, Row, Pagination} from "react-bootstrap";
 import News from "./News";
 
 const NewsList = (massNews) => {
+
+    let items = [];
+    for (let number = 1; number <= 20; number++) {
+        items.push(
+            <Pagination.Item key={number}>
+                {number}
+            </Pagination.Item>,
+        );
+    }
+
     return (
         <>
-            {massNews.myNews.map(myNews => (
-                <Container fluid style = {{marginTop: '50px', marginLeft: '75px'}}>
-                    <Card style = {{width: '18em'}}>
-                        <Card.Body>
-                            <Card.Title>
-                                {myNews.title}
-                            </Card.Title>
-                            <Card.Text>
-                                {myNews.text}
-                            </Card.Text>
-                            <Card.Link>
-                                {myNews.link}
-                            </Card.Link>
-                        </Card.Body>
-                    </Card>
-                </Container>
-                ))
-            }
+            <Row className="justify-content-md-center">
+
+                {massNews.myNews.map(myNews => (
+
+                    <Col sm = "4">
+                        <Container fluid style = {{marginTop: '50px', marginLeft: '50px'}}>
+                            <Card style = {{width: '20em'}}>
+                                <Card.Body style = {{marginBottom: '10px'}}>
+                                    <Card.Title>
+                                        {myNews.title}
+                                    </Card.Title>
+                                    <Card.Text>
+                                        {myNews.text}
+                                    </Card.Text>
+                                    <Card.Link>
+                                        {myNews.link}
+                                    </Card.Link>
+                                </Card.Body>
+                            </Card>
+                        </Container>
+                    </Col>))
+                }
+            </Row>
+            <Pagination className="justify-content-md-center" style = {{marginTop: '15px', marginLeft: '15px', marginBottom: '15px'}}>
+                {items}
+            </Pagination>
         </>
     )
 }
