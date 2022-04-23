@@ -2,9 +2,10 @@ import React from 'react';
 import MyNavbar from "./Components/MyNavbar";
 import News from './Components/Tabs/News';
 import Currency from "./Components/Currency";
+import Login from "./Components/Login";
+import Register from "./Components/Register";
 import {Route, BrowserRouter, Switch} from 'react-router-dom';
-import NewsList from "./Components/Tabs/NewsList";
-import {render} from "react-dom";
+
 
 const App = () => {
     return (
@@ -20,6 +21,12 @@ const App = () => {
                 {/*<Route path="/profile">*/}
                 {/*    <Profile />*/}
                 {/*</Route>*/}
+                <Route path="/login">
+                    <Login />
+                </Route>
+                <Route path="/register">
+                    <Register />
+                </Route>
             </Switch>
         </BrowserRouter>
     )

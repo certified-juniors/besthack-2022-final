@@ -1,7 +1,7 @@
 //Navigation bar
 import React from 'react';
 import Vladimir20 from '../Vladimir20.svg';
-import {Container, Nav, Navbar} from "react-bootstrap";
+import {Button, Container, Nav, Navbar} from "react-bootstrap";
 
 const myNavs = [
     {
@@ -49,6 +49,12 @@ const MyNavbar = () => {
                             {list_nav}
                         </Nav>
                     </Navbar.Collapse>
+                    <Button href = "/login" style = {{marginRight: '10px'}}>
+                        Вход
+                    </Button>
+                    <Button href = "/register">
+                        Регистрация
+                    </Button>
                 </Container>
             </Navbar>
         </div>
