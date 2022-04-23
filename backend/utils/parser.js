@@ -12,11 +12,10 @@ const parser = (url) => {
   .then(function(html){
     let $ = cheerio.load(html)
 
-    //console.log(html)
-    //console.log($('.PriceInformation__price--26G', html).text())
-    console.log($('item').each((i, el) => {
-      console.log(el)
+    console.log($('description').nextAll().map( (i, el) => {
+      el.text()
     }))
+    // console.log($('title').find('title').text())
   })
   .catch(function(err){
     console.log('error', err.statusCode)
@@ -28,7 +27,7 @@ const parser_currency = async (cur) => {
   return new Promise((resolve, reject) => {
     let time = Date.now()
     const options = {
-      uri: `https://www.finam.ru/quote/forex/usd-${cur}`,
+      uri: `https://www.finam.ru/quote/forex/eur-${cur}`,
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0'
       },

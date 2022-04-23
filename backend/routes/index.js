@@ -7,6 +7,7 @@ const [parser, parser_currency] = require('../utils/parser');
 router.route('/').get(async (req, res) => {
 
   console.log(await parser_currency('RUB'))
+  // parser('https://ria.ru/export/rss2/archive/index.xml')
 
   return res
     .status(200)
