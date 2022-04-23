@@ -15,7 +15,7 @@ class User {
             'USD': 0,
             'EUR': 0,
             'CNY': 0,
-            'TRY': 0,
+            'CHF': 0,
             'GBP': 0,
         }
         this.blocked = false;

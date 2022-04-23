@@ -6,52 +6,70 @@ const User = require('../models/User');
 
 class ExchangeRateController {
     static DEFAULT_UPDATE_INTERVAL = 10 * 60 * 1000;
-    constructor () {
+    constructor() {
         get(child(query(ref(db, 'exchange-rates/'), orderByKey()), '-1')).then(snapshot => {
             if (snapshot.val()) {
                 this.lastUpdate = snapshot.val().timestamp;
+                this.lastValues = snapshot.val().values;
             } else {
                 this.updateExchangeRate();
             }
+        });
+        get(ref(db, 'config/exchange-rate-update-interval')).then(snapshot => {
+            this.updateInterval = snapshot.val() || ExchangeRateController.DEFAULT_UPDATE_INTERVAL;
+            this.interval = setInterval(this.updateExchangeRate.bind(this), this.updateInterval);
         });
     }
 
     async getExchangeRate() {
         return (await get(child(query(ref(db, 'exchange-rates/'), orderByKey()), '-1'))).val();
-        
-    }
-
-    async setExchangeRate(currency, rate) {
-        await set(ref(db, 'exchange-rates/' + new Date().getTime()), {
-            currency,
-            rate,
-            timestamp: new Date().getTime()
-        });
     }
 
     async updateExchangeRate() {
         // TODO
-        const currencies = Object.keys(new User(0, 0, 0, 0, 0).balance) ;
+        const currencies = Object.keys(new User(0, 0, 0, 0, 0).balance);
         const promises = currencies.map(async currency => {
-            console.log(currency);
             const price = await parser_currency(currency)
-            return {[currency]: price};
+            return { [currency]: price };
         });
-        const values = await Promise.all(promises);
-        console.log(values);
+        const notokvalues = await Promise.all(promises);
+        const values = {};
+        notokvalues.forEach(notokvalue => {
+            const stringfloat = notokvalue[Object.keys(notokvalue)[0]][0];
+            const float = parseFloat(stringfloat.replace(',', '.'));
+            values[Object.keys(notokvalue)[0]] = float;
+        });
+        const OTNOSITELNO = 'EUR';
+        const OTNOSITELNO_to_rub = values['RUB'];
+        Object.keys(values).forEach(currency => {
+            if (currency == OTNOSITELNO) {
+                values[OTNOSITELNO] = 1.0 / OTNOSITELNO_to_rub;
+                return
+            }
+            if (currency == 'RUB') {
+                values[currency] = 1;
+                return
+            }
 
+            values[currency] = values[currency] / OTNOSITELNO_to_rub;
+        })
+
+        this.lastValues = values;
         this.lastUpdate = new Date().getTime();
+        await set(ref(db, 'exchange-rates/' + this.lastUpdate), {
+            timestamp: this.lastUpdate,
+            values: this.lastValues
+        });
         return this.lastUpdate;
+
     }
 
     async getLastExchangeRates(req, res) {
-        const rates = await get(ref(db, 'exchange-rates'));
-        const currencies = Object.keys(rates);
-        const promises = currencies.map(currency => {
-            return this.getExchangeRate(currency);
+        const values = [];
+        Object.keys(this.lastValues).forEach(currency => {
+            values.push({ title: currency, value: this.lastValues[currency] });
+            res.json(values);
         });
-        const exchangeRates = await Promise.all(promises);
-        res.json(exchangeRates);
     }
 }
 
