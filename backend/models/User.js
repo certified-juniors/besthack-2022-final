@@ -10,6 +10,7 @@ class User {
         this.hashed_password = hashed_password;
         this.created_at = created_at;
         this.role = role;
+        this.balance = 0;
     }
     constructor(json) {
         this.login = json.login;
@@ -17,6 +18,7 @@ class User {
         this.hashed_password = json.hashed_password;
         this.created_at = json.created_at;
         this.role = json.role;
+        this.balance = json.balance;
     }
 }
 
