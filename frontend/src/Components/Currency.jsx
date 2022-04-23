@@ -7,7 +7,7 @@ import CurrencyList from "./CurrencyList";
 
 const Currency = () =>
 {
-  const [myCards, setMyCards] = useState( [
+  const [myCurrency, setMyCards] = useState( [
     {
       title: 'Currency num.1',
       img : ' ',
@@ -40,20 +40,23 @@ const Currency = () =>
     }
   ])
 
-  const currency_list = myCards.map( (card) =>
-    <Card>
-      <Card.Body>
-        <Card.Title>{card.img}{card.title}</Card.Title>
-        <Card.text>{card.text}</Card.text>
-      </Card.Body>
-    </Card>
+  const currency_list = myCurrency.map( (card) =>
+
+     <Card>
+       <Card.Body>
+         <Card.Title>{card.img}{card.title}</Card.Title>
+         <Card.text>{card.text}</Card.text>
+       </Card.Body>
+
+     </Card>
+
   )
 
 
 
   return (
     <div>
-      <CurrencyList myCards = {myCards}/>
+      <CurrencyList myCurrency = {myCurrency}/>
     </div>
   )
 }
