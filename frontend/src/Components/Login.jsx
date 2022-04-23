@@ -4,6 +4,11 @@ import Form from 'react-bootstrap/Form'
 
 const Login = () =>
 {
+
+  const handler = (e) =>{
+    e.preventDefault()
+  }
+
   return (
     <Container>
       <h2 className='text-center'>Вход</h2>
@@ -19,7 +24,7 @@ const Login = () =>
           <Form.Control type="password" placeholder="Пароль" />
         </Form.Group>
 
-        <Button size = "xxl" variant="primary" type="submit">
+        <Button onClick={() => handler()} size = "xxl" variant="primary" type="submit">
           Вход
         </Button>
       </Form>
