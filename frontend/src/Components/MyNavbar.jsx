@@ -1,6 +1,6 @@
 //Navigation bar
 import React from 'react';
-import Vladimir from '../../Vladimir.svg';
+import Vladimir20 from '../Vladimir20.svg';
 import {Container, Nav, Navbar} from "react-bootstrap";
 
 const myNavs = [
@@ -30,12 +30,14 @@ const MyNavbar = () => {
                     <Navbar.Brand href="#">
                         <img
                           alt=""
-                          src={Vladimir}
-                          width="30"
-                          height="30"
+                          src={Vladimir20}
+                          width="35"
+                          height="35"
                           className="d-inline-block align-top"
                         />{' '}
+
                         Кабанчик
+
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">

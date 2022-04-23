@@ -1,7 +1,6 @@
 import React from 'react';
 import {Button, Container} from "react-bootstrap";
 import Form from 'react-bootstrap/Form'
-// import styles from "../styles/register.css";
 
 const Register = () =>
 {
@@ -32,7 +31,7 @@ const Register = () =>
                     <Form.Check type="checkbox" label=
                    "Согласен с условиями пользовательского соглашения"/>
                 </Form.Group>
-                <Button  onClick={this.dontGoToLink} = "xxl" variant="primary" type="submit">
+                <Button  size = "xxl" variant="primary" type="submit">
                     Зарегистрироваться
                 </Button>
             </Form>
