@@ -10,12 +10,13 @@ const { logRegister, logLogin } = require('./EntryController');
 
 class UserController {
     async register(req, res) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
                 return res.status(400).json({ message: "Ошибка при регистрации", errors })
             }
-            const { email, login, password } = req.query;
+            const { email, login, password } = req.body;
             console.log(login);
             const candidate = (await get(child(ref(db), 'users/' + login))).val();
             if (candidate) {
@@ -39,6 +40,7 @@ class UserController {
     }
 
     async login(req, res) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
         try {
             const { loginOrEmail, password } = req.body;
             const isLogin = loginOrEmail.indexOf('@') === -1;

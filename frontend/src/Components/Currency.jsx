@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Card} from "react-bootstrap";
 import {useState} from "react";
 import CurrencyList from "./CurrencyList";
@@ -43,22 +43,40 @@ const Currency = () => {
       text: 'exchange rate 6'
     }
   ])
-  myaxios("last-exchange-rates", {method: "POST"}).then(
-    res => {
-      setMyCards(res.data);
-    }
-  )
-  const currency_list = myCurrency.map((card) =>
 
-    <Card>
-      <Card.Body>
-        <Card.Title>{card.title}</Card.Title>
-        <Card.text>{card.text}</Card.text>
-      </Card.Body>
+  // setTimeout( () => {
+  // myaxios("last-exchange-rates", {method: "POST"}).then(
+  //   res => {
+  //     setMyCards(res.data);
+  //     console.log(res)
+  //     // console.log(myCurrency)
+  //   }
+  // )}, 20000)
 
-    </Card>
-  )
+  // const currency_list = myCurrency.map((card) =>
+  //
+  //   <Card>
+  //     <Card.Body>
+  //       <Card.Title>{card.title}</Card.Title>
+  //       <Card.text>{card.text}</Card.text>
+  //     </Card.Body>
+  //
+  //   </Card>
+  // )
 
+  useEffect(() => {
+    const url = 'http://127.0.0.1:2001/last-exchange-rates'
+    axios.post(url).then((resp) => {
+      console.log(resp.data)
+      resp.data.map(data  => (
+        data.text = 1 / data.text,
+          data.text = data.text.toFixed(4)
+      )
+    )
+
+      setMyCards(resp.data)
+    })
+  }, [setMyCards])
 
   return (
     <div>

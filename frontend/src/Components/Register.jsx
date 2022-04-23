@@ -1,46 +1,59 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Container} from "react-bootstrap";
 import Form from 'react-bootstrap/Form'
+import config from "../config";
+
+class Register extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            password: '',
+            email: '',
+            login: '',
+        }
+        this.handler = this.handler.bind(this);
+    }
+
+    handler(e) {
+
+        alert(this.state.login + this.state.email + this.state.password);
+        e.preventDefault();
+    }
+
+    render(d) {
+
+        return (
+            <Container>
+                <h2 className='text-center'>Регистрация</h2>
+
+                <Form>
+                    <Form.Group className="mb-3" >
+                        <Form.Label>Введите Логин</Form.Label>
+                        <Form.Control id="login" type="login" placeholder="Логин"/>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3">
+                        <Form.Label>Введите Email</Form.Label>
+                        <Form.Control id="email" type="email" placeholder="name@example.com"/>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3">
+                        <Form.Label>Введите пароль</Form.Label>
+                        <Form.Control id="password" type="password" placeholder="Пароль"/>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Check type="checkbox" label=
+                            "Согласен с условиями пользовательского соглашения"/>
+                    </Form.Group>
+                    <Button size="xxl" variant="primary" type="submit" formMethod={"POST"} formAction={"http://" + config.host + "/register"}>
+                        Зарегистрироваться
+                    </Button>
+                </Form>
 
 
-const Register = () =>
-{
-    const handler = (e) =>{
-    e.preventDefault()
-}
-
-    return (
-        <Container>
-         <h2 className='text-center'>Регистрация</h2>
-
-            <Form>
-                <Form.Group className="mb-3" controlId="formBasicLogin">
-                    <Form.Label>Введите Логин</Form.Label>
-                    <Form.Control type="login" placeholder="Логин" />
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Введите Email</Form.Label>
-                    <Form.Control type="email" placeholder="name@example.com" />
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Введите пароль</Form.Label>
-                    <Form.Control type="password" placeholder="Пароль" />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label=
-                   "Согласен с условиями пользовательского соглашения"/>
-                </Form.Group>
-                <Button  onClick={() => handler()} size = "xxl" variant="primary" type="submit">
-                    Зарегистрироваться
-                </Button>
-            </Form>
-
-
-        </Container>
-    )
-
+            </Container>
+        )
+    }
 }
 
 export default Register;
