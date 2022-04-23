@@ -38,5 +38,5 @@ router.route('/register').post(userController.register,
       return true
     })
   ]);
-router.route('/last-exchange-rates').post(exchangeController.getLastExchangeRates);
+router.route('/last-exchange-rates').post(exchangeController.getLastExchangeRates.bind(exchangeController));
 module.exports = router;
