@@ -10,11 +10,11 @@ const myNavs = [
     },
     {
         title: 'Курс',
-        link: '/',
+        link: '/currency',
     },
     {
         title: 'Профиль',
-        link: '/',
+        link: '/profile',
     },
 ]
 
