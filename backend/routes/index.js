@@ -8,7 +8,7 @@ const [parser, page_currency, pageContent_parser_ria] = require('../utils/parser
 router.route('/').get(async (req, res) => {
 
   //parser('https://ria.ru/export/rss2/archive/index.xml')
-  let text = await pageContent_parser_ria('https://ria.ru/20220423/ssha-1785101049.html')
+  let text = await pageContent_parser_ria('https://www.vesti.ru/article/2711858')
 
   return res
     .status(200)
