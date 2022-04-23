@@ -21,7 +21,7 @@ const Register = () =>
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Введите Email</Form.Label>
-                    <Form.Control type="email" placeholder="Email" />
+                    <Form.Control type="email" placeholder="name@example.com" />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
