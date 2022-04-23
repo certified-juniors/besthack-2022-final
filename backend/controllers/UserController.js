@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator')
 const { secret } = require("../config");
-const {set, ref, get, child} = require('firebase/database');
+const { set, ref, get, child } = require('firebase/database');
 
 class UserController {
     async register(req, res) {
@@ -13,17 +13,18 @@ class UserController {
             if (!errors.isEmpty()) {
                 return res.status(400).json({ message: "Ошибка при регистрации", errors })
             }
-            const { email, username, password } = req.body;
-            const candidate = get(child(ref(db), 'users/' + username));
-            console.log(candidate);
-        //     if (candidate) {
-        //         return res.status(400).json({ message: "Пользователь с таким именем уже существует" })
-        //     }
-        //     const hashPassword = bcrypt.hashSync(password, 7);
-        //     const userRole = await Role.findOne({ value: "USER" })
-        //     const user = new User({ username, password: hashPassword, roles: [userRole.value] })
+            const { email, login, password } = req.query;
+            console.log(username);
+            const candidate = (await get(child(ref(db), 'users/' + username))).val();
+
+            if (candidate) {
+                return res.status(400).json({ message: "Пользователь с таким именем уже существует" })
+            }
+            const hashPassword = bcrypt.hashSync(password, 7);
+            const user = new User(login, email, hashPassword, new Date(), User.ROLE.CLIENT);
         //     await user.save()
         //     return res.json({ message: "Пользователь успешно зарегистрирован" })
+            res.json({ message: "Пользователь успешно зарегистрирован" });
         } catch (e) {
             console.log(e)
             res.status(400).json({ message: 'Registration error' })

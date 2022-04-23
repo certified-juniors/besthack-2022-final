@@ -1,5 +1,5 @@
 class Article {
-    CATEGORY = {
+    static CATEGORY = {
         FOREX: 1,
         SECMARKS: 2,
         POLICY: 3,

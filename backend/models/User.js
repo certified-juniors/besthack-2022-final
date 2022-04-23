@@ -1,5 +1,5 @@
 class User {
-    ROLE = {
+    static ROLE = {
         ADMIN: 'admin',
         READONLY: 'readonly',
         CLIENT: 'client',
