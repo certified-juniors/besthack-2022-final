@@ -5,10 +5,14 @@ const [parser, parser_currency] = require('../utils/parser');
 const User = require('../models/User');
 
 class ExchangeRateController {
+    
     static DEFAULT_UPDATE_INTERVAL = 10 * 60 * 1000;
     constructor() {
+        this.lastUpdate = new Date().getTime();
+        this.lastValues = {};
         get(child(query(ref(db, 'exchange-rates/'), orderByKey()), '-1')).then(snapshot => {
             if (snapshot.val()) {
+                console.log(snapshot.val());
                 this.lastUpdate = snapshot.val().timestamp;
                 this.lastValues = snapshot.val().values;
             } else {
@@ -19,6 +23,7 @@ class ExchangeRateController {
             this.updateInterval = snapshot.val() || ExchangeRateController.DEFAULT_UPDATE_INTERVAL;
             this.interval = setInterval(this.updateExchangeRate.bind(this), this.updateInterval);
         });
+        
     }
 
     async getExchangeRate() {
@@ -60,16 +65,16 @@ class ExchangeRateController {
             timestamp: this.lastUpdate,
             values: this.lastValues
         });
-        return this.lastUpdate;
-
     }
 
     async getLastExchangeRates(req, res) {
         const values = [];
-        Object.keys(this.lastValues).forEach(currency => {
-            values.push({ title: currency, value: this.lastValues[currency] });
-            res.json(values);
+        const to = this.lastValues;
+        Object.keys(to).forEach(currency => {
+            values.push({ title: currency, text: this.lastValues[currency] });
         });
+        res.setHeader("Access-Control-Allow-Origin", '*')
+        res.send(values);
     }
 }
 
