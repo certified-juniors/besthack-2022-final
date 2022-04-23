@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/UserController');
+const exchangeController = require('../controllers/ExchangeRateController')
 const { check } = require("express-validator");
 const [parser, page_currency, pageContent_parser_ria] = require('../utils/parser');
 
