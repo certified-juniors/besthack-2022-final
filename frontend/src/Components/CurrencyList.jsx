@@ -3,10 +3,8 @@ import {Button, Container, Card} from "react-bootstrap";
 import Currency from "./Currency";
 
 const CurrencyList = (massCurrency) => {
-  console.log(massCurrency)
   return (
     <>
-      <p> card</p>
       {massCurrency.myCurrency.map(myCurrency => (
         <Container fluid style={{marginTop: '50px', marginLeft: '75px'}}>
           <Card style={{width: '18rem'}}>
