@@ -10,7 +10,6 @@ function ModalButton(myCurrency) {
 
   return (
     <>
-
       <Button variant="primary" onClick={handleShow}>
         Купить
       </Button>
