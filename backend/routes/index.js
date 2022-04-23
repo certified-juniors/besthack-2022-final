@@ -1,15 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/UserController');
+const exchangeController = require('../controllers/ExchangeRateController')
 const { check } = require("express-validator");
-const [parser, parser_currency] = require('../utils/parser');
-const exchangeController = require('../controllers/ExchangeRateController');
+const [parser, page_currency, pageContent_parser_ria] = require('../utils/parser');
 
 router.route('/').get(async (req, res) => {
-  exchangeController.updateExchangeRate();
+
+  //parser('https://ria.ru/export/rss2/archive/index.xml')
+  let text = await pageContent_parser_ria('https://ria.ru/20220423/ssha-1785101049.html')
+
   return res
     .status(200)
-    .send(`<h1>hello</h1>`)
+    .send(`<p>${text}</p>`)
 })
 
 router.route('/login').post(userController.login);

@@ -13,12 +13,13 @@ const parser = (url) => {
     let $ = cheerio.load(html)
 
     console.log($('description').nextAll().map( (i, el) => {
-      el.text()
+      if ('text' in el)
+        el.text()
     }))
     // console.log($('title').find('title').text())
   })
   .catch(function(err){
-    console.log('error', err.statusCode)
+    console.log('error', err)
   })
 }
 
@@ -46,5 +47,27 @@ const parser_currency = async (cur) => {
   });
 }
 
+const pageContent_parser_ria = async (url) => {
+  return new Promise((resolve, reject) => {
+    const options = {
+      uri: url,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0'
+      },
+    }
+    request(options)
+      .then(function (html) {
+        let $ = cheerio.load(html)
+        let a = []
+        let text = $('.article__text').text();
+        text = text.split('.').map((s) => s.trim()).join('. ');
+        resolve(text)
+      })
+      .catch(function (err) {
+        reject(err)
+      })
+  })
+}
 
-module.exports = [parser, parser_currency]
+
+module.exports = [parser, parser_currency, pageContent_parser_ria]
