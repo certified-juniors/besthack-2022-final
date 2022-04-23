@@ -1,20 +1,19 @@
 const ExchangeRate = require('../models/ExchangeRate');
 const { db } = require('../fbapi');
 const { push, set, ref, get, child, equalTo, query, orderByValue, onValue, orderByKey } = require('firebase/database');
+const [parser, parser_currency] = require('../utils/parser');
+const User = require('../models/User');
 
 class ExchangeRateController {
     static DEFAULT_UPDATE_INTERVAL = 10 * 60 * 1000;
     constructor () {
-        const lstupd = (await get(child(query(ref(db, 'exchange-rates/'), orderByKey()), '-1'))).val().timestamp
-        this.lastUpdate = lstupd ? lstupd : this.updateExchangeRate();
-        const intms = (await get(ref(db, 'config/exchange-rate-update-interval'))).val();
-        if (!intms) {
-            set(ref(db, 'config/exchange-rate-update-interval'), ExchangeRateController.DEFAULT_UPDATE_INTERVAL);
-            this.updateInterval = ExchangeRateController.DEFAULT_UPDATE_INTERVAL;
-        } else {
-            this.updateInterval = intms;
-        }
-        this.interval = setInterval(this.updateExchangeRate.bind(this), this.intervalMs);
+        get(child(query(ref(db, 'exchange-rates/'), orderByKey()), '-1')).then(snapshot => {
+            if (snapshot.val()) {
+                this.lastUpdate = snapshot.val().timestamp;
+            } else {
+                this.updateExchangeRate();
+            }
+        });
     }
 
     async getExchangeRate() {
@@ -32,14 +31,15 @@ class ExchangeRateController {
 
     async updateExchangeRate() {
         // TODO
-        const rates = await get(ref(db, 'exchange-rates'));
-        const currencies = Object.keys(rates);
-        const promises = currencies.map(currency => {
-            if (currency == 'RUB')
-                return Promise.resolve();
-            return this.setExchangeRate(currency, Math.random());
+        const currencies = Object.keys(new User(0, 0, 0, 0, 0).balance) ;
+        const promises = currencies.map(async currency => {
+            console.log(currency);
+            const price = await parser_currency(currency)
+            return {[currency]: price};
         });
-        await Promise.all(promises);
+        const values = await Promise.all(promises);
+        console.log(values);
+
         this.lastUpdate = new Date().getTime();
         return this.lastUpdate;
     }

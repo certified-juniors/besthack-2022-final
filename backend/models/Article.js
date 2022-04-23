@@ -15,6 +15,7 @@ class Article {
         this.category = defineCategory(content);
     }
 
+    
     defineCategory(content) {
         content = toString(content);
         let forex_counter = 0;
