@@ -73,7 +73,8 @@ class ExchangeRateController {
         Object.keys(to).forEach(currency => {
             values.push({ title: currency, text: this.lastValues[currency] });
         });
-        res.json(values);
+        res.setHeader("Access-Control-Allow-Origin", '*')
+        res.send(values);
     }
 }
 
