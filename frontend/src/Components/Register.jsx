@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Container} from "react-bootstrap";
 import Form from 'react-bootstrap/Form'
-// import styles from "../styles/register.css";
+
 
 const Register = () =>
 {
