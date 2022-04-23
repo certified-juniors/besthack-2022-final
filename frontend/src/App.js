@@ -1,9 +1,15 @@
-import Navbar from './Components/Navbar/Navbar';
+import Register from "./Components/Register";
+import React from 'react';
+import MyNavbar from "./Components/Navbar/MyNavbar";
+import Login from "./Components/Login";
 
-const App = () => {
-    return <div>
-        <Navbar />
+function App() {
+  return (
+    <div className="App">
+      <MyNavbar/>
+      <Login />
     </div>
+  );
 }
 
 export default App;
