@@ -1,6 +1,7 @@
-import React from 'react';
-import {Button, Container, Card, Col, Row, Pagination} from "react-bootstrap";
+import React, {useState} from 'react';
+import {Button, Container, Card, Col, Row, Pagination, Modal} from "react-bootstrap";
 import News from "./News";
+import {render} from "react-dom";
 
 const NewsList = (massNews) => {
 
@@ -13,6 +14,11 @@ const NewsList = (massNews) => {
         );
     }
 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
         <>
             <Row className="justify-content-md-center">
@@ -21,7 +27,8 @@ const NewsList = (massNews) => {
 
                     <Col sm = "4">
                         <Container fluid style = {{marginTop: '50px', marginLeft: '50px'}}>
-                            <Card style = {{width: '20em'}}>
+                            <Card onClick = {handleShow} style = {{width: '20em'}}>
+
                                 <Card.Body style = {{marginBottom: '10px'}}>
                                     <Card.Title>
                                         {myNews.title}
@@ -34,6 +41,15 @@ const NewsList = (massNews) => {
                                     </Card.Link>
                                 </Card.Body>
                             </Card>
+
+                            <Modal show={show} onHide={handleClose}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>{myNews.title}</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>{myNews.text}</Modal.Body>
+                                <Modal.Footer>{myNews.link}</Modal.Footer>
+                            </Modal>
+
                         </Container>
                     </Col>))
                 }
