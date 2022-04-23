@@ -15,13 +15,6 @@ class Entry {
         this.category = category;
         this.data = data;
     }
-    constructor(json) {
-        this.timestamp = json.timestamp;
-        this.ip = json.ip;
-        this.username = json.username;
-        this.category = json.category;
-        this.data = json.data;
-    }
 }
 
 module.exports = Entry;

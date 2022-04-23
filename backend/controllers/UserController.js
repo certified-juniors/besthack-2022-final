@@ -6,6 +6,7 @@ const md5 = require('md5');
 const { validationResult } = require('express-validator')
 const { secret } = require("../config");
 const { push, set, ref, get, child, equalTo, query, orderByValue, onValue } = require('firebase/database');
+const { logRegister, logLogin } = require('./EntryController');
 
 class UserController {
     async register(req, res) {
@@ -29,6 +30,7 @@ class UserController {
             const user = new User(login, email, hashPassword, new Date().getTime(), User.ROLE.CLIENT);
             await set(ref(db, "loginbyemail/" + hashed_email), login);
             await set(ref(db, 'users/' + login), user);
+            logRegister(user, req);
             res.status(200).json({ message: "Пользователь успешно зарегистрирован" });
         } catch (e) {
             console.log(e)
@@ -61,6 +63,7 @@ class UserController {
                 return res.status(400).json({ message: "Неверный пароль" })
             }
             const token = jwt.sign({ login }, secret, { expiresIn: '30m' });
+            logLogin(user, req);
             return res.status(200).json({ token });
         } catch (e) {
             console.log(e)
