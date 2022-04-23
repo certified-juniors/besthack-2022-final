@@ -7,8 +7,9 @@ const app = express();
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(express.json())
 app.use(routes);
-app.use((req, res, next) => {
+app.on(express.eve ,(req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
     return next()
 });
 
