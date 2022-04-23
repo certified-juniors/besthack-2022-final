@@ -57,7 +57,7 @@ const MyNavbar = () => {
                     </Button>
                 </Container>
             </Navbar>
-            <marquee direction="right" scrollamount="10">Бегущая строка</marquee>
+
         </div>
     )
 }

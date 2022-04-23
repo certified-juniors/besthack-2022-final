@@ -30,12 +30,10 @@ const NewsList = (massNews) => {
                             <Card style={{width: '20em'}}>
 
                                 <Card.Body style={{marginBottom: '10px'}}>
-                                    <Card.Title>
+                                    <Card.Title style = {{margin: "10px"}}>
                                         {myNews.title}
                                     </Card.Title>
-                                    <Card.Text>
-                                        {myNews.text}
-                                    </Card.Text>
+
                                     <ModalButtonNews myNews={myNews}/>
                                 </Card.Body>
                             </Card>

@@ -43,9 +43,7 @@ const News = () => {
                 <Card.Title>
                     {card.title}
                 </Card.Title>
-                <Card.Text>
-                    {card.text}
-                </Card.Text>
+
                 <Card.Link>
                     {card.link}
                 </Card.Link>
