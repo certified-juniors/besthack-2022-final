@@ -1,7 +1,6 @@
 const express = require('express');
 const routes = require('./routes');
 const bodyparser = require('body-parser');
-const { db } = require('./config');
 
 const app = express();
 
