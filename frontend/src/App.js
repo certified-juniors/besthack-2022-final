@@ -3,6 +3,8 @@ import MyNavbar from "./Components/MyNavbar";
 import News from './Components/Tabs/News';
 import Currency from "./Components/Currency";
 import {Route, BrowserRouter, Switch} from 'react-router-dom';
+import NewsList from "./Components/Tabs/NewsList";
+import {render} from "react-dom";
 
 const App = () => {
     return (
@@ -22,4 +24,5 @@ const App = () => {
         </BrowserRouter>
     )
 }
+
 export default App;
