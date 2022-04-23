@@ -1,7 +1,39 @@
 const request = require('request-promise');
 const cheerio = require('cheerio');
 
-const parser = (url) => {
+const parser_ria = (url) => {
+    const options = {
+      uri: url,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0'
+      },
+    }
+    request(options)
+      .then(function(html) {
+        let result = []
+        let $ = cheerio.load(html, {decodeEntities: false, xmlMode: true})
+        console.log($('title').text())
+        $('channel').find('item').each( (i, el) => {
+          result[i] = {
+            title: $(el).find('title').text(),
+            link: $(el).find('link').text(),
+            description: $(el).find('description').text(),
+            image: $(el).find('image').text()
+          }
+          // result[i] = {
+          //   ...result,
+          //   text: pageContent_parser_ria(result[i].link)
+          // }
+        })
+        console.log(result)
+        return result
+      })
+      .catch(function (err) {
+        return err.statusCode
+      })
+}
+
+const parser_rbk = (url) => {
   const options = {
     uri: url,
     headers: {
@@ -9,18 +41,29 @@ const parser = (url) => {
     },
   }
   request(options)
-  .then(function(html){
-    let $ = cheerio.load(html)
-
-    console.log($('description').nextAll().map( (i, el) => {
-      if ('text' in el)
-        el.text()
-    }))
-    // console.log($('title').find('title').text())
-  })
-  .catch(function(err){
-    console.log('error', err)
-  })
+    .then(function(html) {
+      let result = []
+      let $ = cheerio.load(html, {decodeEntities: false, xmlMode: true})
+      console.log($('title').text())
+      $('channel').find('item').each( (i, el) => {
+        result[i] = {
+          title: $(el).find('title').text(),
+          link: $(el).find('link').text(),
+          description: $(el).find('description').text(),
+          full_text: $(el).find('rbc_news:full-text').text()
+        }
+        console.log(result[i])
+        // result[i] = {
+        //   ...result,
+        //   text: await pageContent_parser_ria(result[i].link)
+        // }
+      })
+      //console.log(result)
+      return result
+    })
+    .catch(function (err) {
+      return err.statusCode
+    })
 }
 
 const parser_currency = async (cur) => {
@@ -47,7 +90,7 @@ const parser_currency = async (cur) => {
   });
 }
 
-const pageContent_parser_ria = async (url) => {
+async function pageContent_parser_ria(url){
   return new Promise((resolve, reject) => {
     const options = {
       uri: url,
@@ -112,4 +155,9 @@ const pageContent_parser_vesti = async (url) => {
 }
 
 
-module.exports = [parser, parser_currency, pageContent_parser_vesti]
+module.exports = [
+  parser_ria,
+  parser_rbk,
+  parser_currency,
+  pageContent_parser_vesti
+]
