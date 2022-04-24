@@ -3,6 +3,7 @@ import { Button, Form, Table } from "react-bootstrap";
 import config from "../config";
 import axios from 'axios';
 import { useState } from "react";
+import Balance from "./Balance";
 
 
 const Administration = () => {
@@ -44,6 +45,8 @@ const Administration = () => {
                     <Form.Control type="text" id="id" />
                     <Button size="lg" variant="primary" type="submit" />
                 </Form>
+                <h2>Пополнить баланс пользователю</h2>
+                <Balance />
             </div>
         }
     </div>
