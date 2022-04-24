@@ -60,7 +60,7 @@ const NewsList = (massNews) => {
                                                     MozTextSizeAdjust: 'sm'
                                                 }}> {(formatDate(new Date(myNews.created_at), 'dd/mm/yyyy hh:mm:ss'))}</p>
                                             </Col>
-                                            <Col style={{ marginLeft: '160px' }}>
+                                            <Col style={{ marginLeft: '160px', marginTop: '17px' }}>
                                                 <ModalButtonNews myNews={myNews} className="justify-content-end" />
                                             </Col>
                                         </Row>
