@@ -41,10 +41,10 @@ function ModalButton(myCurrency) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" style = {{backgroundColor: "#B14646FF", borderColor: "#B14646FF"}} onClick={handleClose}>
             Отмена
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button style = {{backgroundColor: "rgb(88,161,43)", borderColor: "rgb(88,161,43)"}}variant="primary" onClick={handleClose}>
             Купить
           </Button>
         </Modal.Footer>
