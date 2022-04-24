@@ -77,7 +77,7 @@ class Register extends React.Component {
                             onChange={this.handlePasswordChange} />
                     </Form.Group>
 
-                    <Button href = "/" size="xxl" variant="primary" type="submit" >
+                    <Button size="xxl" variant="primary" type="submit" >
                         Зарегистрироваться
                     </Button>
                 </Form>

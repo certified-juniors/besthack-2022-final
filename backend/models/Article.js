@@ -12,7 +12,7 @@ class Article {
         this.content = content;
         this.source = source;
         this.created_at = created_at;
-        this.category = defineCategory(content);
+        this.category = this.defineCategory(content);
     }
 
     
