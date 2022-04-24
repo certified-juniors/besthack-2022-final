@@ -38,14 +38,20 @@ const Administration = () => {
     return <div>
         {!admin ? <h1>Пожалуйста, подождите</h1> :
             <div className="container">
-                <h1>Администратор</h1>
-                <h2>Разблокировать пользователя</h2>
-                <Form onSubmit={handleUnblockUser}>
-                    <Form.Control type="text" id="id" placeholder="Введите логин разблокируемого"/>
-                    <Button size="lg" variant="primary" type="submit">Разблокировать</ Button>
-                </Form>
-                <h2>Пополнить баланс пользователю</h2>
-                <Balance />
+                <div className = "vstack gap-2 col-md-5 mx-auto">
+                    <div className="col-auto">
+                        <h2>Администратор</h2>
+                        <h4>Разблокировать пользователя</h4>
+                        <Form onSubmit={handleUnblockUser}>
+                            <Form.Control type="text" id="id" placeholder="Введите логин разблокируемого"/>
+                            <Button style = {{marginTop: "10px"}} size="mg" variant="primary" type="submit">Разблокировать</ Button>
+                        </Form>
+                    </div>
+                    <div className = "col-auto">
+                        <h4 style = {{marginTop: "5px"}}>Пополнить баланс пользователю</h4>
+                        <Balance />
+                    </div>
+                </div>
             </div>
         }
     </div>

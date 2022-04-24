@@ -34,7 +34,7 @@ const Balance = () =>
     <div>
       <Form.Control type="text" id="login" placeholder="Введите логин" onChange={(e) => {setLogin(e.target.value); getUser()}}/>
       {user ? <h1 style={{textAlign: 'left'}}>Баланс: {balance}</h1> : null}
-      <Button variant="primary" onClick={handleShow}>
+      <Button style = {{marginTop: "10px"}} variant="primary" onClick={handleShow}>
         Пополнить рублевой баланс пользователю
       </Button>
 
@@ -56,7 +56,7 @@ const Balance = () =>
             </Form.Group>
           </Form>
         </Modal.Body>
-          <Button  variant = "primary" onClick = {handleClose}>
+          <Button variant = "primary" onClick = {handleClose}>
                 Пополнить баланс
           </Button>
       </Modal>
