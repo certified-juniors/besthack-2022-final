@@ -4,6 +4,7 @@ class Article {
         SECMARKS: 2,
         POLICY: 3,
     }
+    
     static FOREX_KEYWORDS = [];
     static SECMARKS_KEYWORDS = [];
     static POLICY_KEYWORDS = [];
