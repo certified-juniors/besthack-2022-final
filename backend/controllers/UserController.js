@@ -73,7 +73,7 @@ class UserController {
             if (user.blocked) return res.status(400).json({ message: "Пользователь заблокирован" });
             const isPasswordValid = bcrypt.compareSync(password, user.hashed_password);
             if (!isPasswordValid) { 
-                set(ref(db, 'users/' + login), { tries: user.tries + 1 });
+                set(ref(db, 'users/' + login + "/tries"), user.tries + 1);
                 if (user.tries > 5) {
                     set(ref(db, 'users/' + login), { blocked: true });
                     return res.status(400).json({ message: "Пользователь заблокирован" });
