@@ -9,7 +9,7 @@ function ModalButtonNews(myNews){
 
     return(
         <>
-            <Button style = {{background : "dodgerblue"}} variant = "primary" onClick = {handleShow}>
+            <Button style = {{background : "dodgerblue", marginRight: "20px"}} variant = "primary" onClick = {handleShow}>
                 Смотреть
             </Button>
 

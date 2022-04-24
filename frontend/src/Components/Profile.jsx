@@ -5,11 +5,11 @@ import Balance from "./Balance";
 
 
 const Profile = () => {
-    const token = localStorage.getItem('token');
 
     return(
         <div>
             <Balance/>
+
         </div>
     )
 }

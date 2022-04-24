@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {Spinner} from "react-bootstrap";
 import NewsList from "./NewsList";
 import {useEffect} from "react";
 import axios from "axios";
@@ -23,8 +24,8 @@ const News = () => {
     }, 1000*10)}, []);
 
     return(
-        <div>
-            {loaded ? <NewsList myNews={myNews}/> : <div>Loading...</div>}
+        <div align = "center" style = {{marginTop: "50px"}}>
+            {loaded ? <NewsList myNews={myNews}/> : <Spinner animation = "border" />}
         </div>
     )
 }
