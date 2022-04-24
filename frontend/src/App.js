@@ -4,7 +4,6 @@ import News from './Components/News';
 import Currency from "./Components/Currency";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
-import Balance from "./Components/Balance"
 import Administration from "./Components/Administration"
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import axios from "axios";

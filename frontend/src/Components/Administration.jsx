@@ -3,7 +3,6 @@ import { Button, Form, Table } from "react-bootstrap";
 import config from "../config";
 import axios from 'axios';
 import { useState } from "react";
-import Balance from "./Balance";
 
 
 const Administration = () => {
@@ -46,10 +45,6 @@ const Administration = () => {
                             <Form.Control type="text" id="id" placeholder="Введите логин разблокируемого"/>
                             <Button style = {{marginTop: "10px"}} size="mg" variant="primary" type="submit">Разблокировать</ Button>
                         </Form>
-                    </div>
-                    <div className = "col-auto">
-                        <h4 style = {{marginTop: "5px"}}>Пополнить баланс пользователю</h4>
-                        <Balance />
                     </div>
                 </div>
             </div>
