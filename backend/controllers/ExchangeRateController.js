@@ -26,8 +26,9 @@ class ExchangeRateController {
             this.interval = setInterval(this.updateExchangeRate.bind(this), this.updateInterval);
         });
     }
-    
+
     async buyRate(req, res) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
         try {
             const { currency, amount, token } = req.query;
             if (amount <= 0) {
@@ -54,6 +55,37 @@ class ExchangeRateController {
             console.error(error);
         }
     }
+
+    async sellRate(req, res) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        try {
+            const { currency, amount, token } = req.query;
+            if (amount <= 0) {
+                res.status(400).json({
+                    message: 'Amount must be greater than 0'
+                });
+            }
+            const decoded = jwt.verify(token, secret);
+            const login = decoded.login;
+            const user = (await get(ref(db, 'users/' + login))).val();
+            if (user.balance[currency] < amount / this.lastValues[currency]) {
+                res.status(400).json({
+                    message: 'Not enough money'
+                });
+            }
+            user.balance[currency] = user.balance[currency] + amount;
+            user.balance["RUB"] = user.balance["RUB"] - amount / this.lastValues[currency];
+            await set(ref(db, 'users/' + login), user);
+            logBuyRate(user, req, currency, amount);
+            res.status(200).json({
+                message: 'Success'
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
 
     async getExchangeRate() {
         return (await get(child(query(ref(db, 'exchange-rates/'), orderByKey()), '-1'))).val();
