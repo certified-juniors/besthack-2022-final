@@ -74,4 +74,5 @@ router.route('/isAdmin').post(userController.isAdmin.bind(userController));
 router.route('/get-user-info').post(userController.getUser.bind(userController));
 router.route('/get-user-info-by-login').post(userController.getUserByLogin.bind(userController));
 router.route('/unblock-user').post(userController.unblockUser.bind(userController));
+router.route('/sell-rate').post(exchangeController.sellRate.bind(exchangeController));
 module.exports = router;
