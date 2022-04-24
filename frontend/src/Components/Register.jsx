@@ -12,6 +12,8 @@ class Register extends React.Component {
             password: '',
             email: '',
             login: '',
+            message: '',
+            errors: ''
         }
         this.handler = this.handler.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -27,7 +29,15 @@ class Register extends React.Component {
         axios(url, {
             method: 'POST',
         }).then(res => {
-            console.log(res.data)
+            if (res.data.message) {
+                this.setState({ message: res.data.message });
+            }
+            if (res.data.errors ) {
+                let merrors = '';
+                for (let i = 0; i < res.data.errors.length; i++) {
+                    merrors += res.data.errors[i] + '\n';
+                }
+            } 
         });
     }
 
@@ -47,6 +57,8 @@ class Register extends React.Component {
             <Container>
                 <h2 className='text-center'>Регистрация</h2>
                 <Form onSubmit={this.handler}>
+                <h3>{this.state.message}</h3>
+                <h3>{this.state.errors}</h3>
                     <Form.Group className="mb-3" >
                         <Form.Label>Введите Логин</Form.Label>
                         <Form.Control id="login" type="login" placeholder="Логин" value={this.state.login}
