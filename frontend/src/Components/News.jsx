@@ -40,36 +40,25 @@ const News = () => {
         }
     ])
 
-/*    const news_list = myNews.map((card, idx) =>
 
-        <Card key = {'menu item ${idx}'}>
-            <Card.body>
-                <Card.Title>
-                    {card.title}
-                </Card.Title>
-
-                <Card.Link>
-                    {card.link}
-                </Card.Link>
-            </Card.body>
-        </Card>
-    )*/
 
     useEffect(() => {
-        const url = 'http://127.0.0.1:2001/get_news?amount=a'
-        axios.post(url).then((resp) => {
 
-/*            resp.data.map(data  => (
 
-              )*/
+
+        const url = 'http://127.0.0.1:2001/get_ria'
+
+/*        axios.post(url).then((resp) => {
             console.log(resp.data)
-            setMyNews(resp.data)}
-        )
-    }, [setMyNews])
-/*    const url = 'http://127.0.0.1:2001/get_rbk'
+            setMyNews(resp.data)
+        }, setMyNews)*/
+
         axios.post(url).then((resp) => {
             console.log(resp.data)
-    })*/
+            setTimeout(() => setMyNews(resp.data), 60000);
+        })
+    })
+
 
     return(
         <div>

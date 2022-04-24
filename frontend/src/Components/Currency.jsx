@@ -79,11 +79,26 @@ const Currency = () => {
     axios.post(url).then((resp) => {
 
       resp.data.map(data  => (
+          data.text = 1 / data.text,
+            data.text = data.text.toFixed(4)
+        )
+      )
+
+      setMyCards(resp.data)
+    })
+  }, [setMyCards])
+
+  useEffect(() => {
+    const url = 'http://' + config.host + '/last-exchange-rates';
+    axios.post(url).then((resp) => {
+
+      resp.data.map(data  => (
         data.text = 1 / data.text,
           data.text = data.text.toFixed(4)
       )
     )
-      setMyCards(resp.data)
+      setTimeout(() => setMyCards(resp.data), 600000);
+
     })
   }, [setMyCards])
 
