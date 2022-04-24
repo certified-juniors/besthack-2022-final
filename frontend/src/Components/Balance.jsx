@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {Button, Modal, Form} from "react-bootstrap";
 import {useEffect} from "react";
+import axios from 'axios';
+import config from "../config";
 
 
 const Balance = () =>
@@ -8,9 +10,19 @@ const Balance = () =>
 
   const [show, setShow] = useState(false);
   const [value, setValue] = useState(0);
-
+  const [user, setUser] = useState('');
   const [balance, setBalance] = useState(0)
-
+  const [login, setLogin] = useState('');
+  
+  const getUser = () => {
+    axios.post('http://' + config.host + '/get-user-info-by-login?login='+login).then((resp) => {
+      console.log(resp.data);
+      setUser(resp.data.user);
+      setBalance(resp.data.balance);
+    }).catch((err) => {
+      setUser('');
+    });
+  }
   const handleClose = () =>
   {
     setBalance(+value+balance)
@@ -20,10 +32,10 @@ const Balance = () =>
 
   return (
     <div>
-
-      <h1 style={{textAlign: 'left'}}>Баланс: {balance}</h1>
+      <Form.Control type="text" id="login" placeholder="Введите логин" onChange={(e) => {setLogin(e.target.value); getUser()}}/>
+      {user ? <h1 style={{textAlign: 'left'}}>Баланс: {balance}</h1> : null}
       <Button variant="primary" onClick={handleShow}>
-        Пополнить баланс
+        Пополнить рублевой баланс пользователю
       </Button>
 
       <Modal show={show} onHide={handleClose}>
@@ -48,9 +60,6 @@ const Balance = () =>
                 Пополнить баланс
           </Button>
       </Modal>
-
-
-
     </div>
   )
 }
