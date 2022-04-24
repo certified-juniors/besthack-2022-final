@@ -5,12 +5,12 @@ const exchangeController = require('../controllers/ExchangeRateController')
 const { check } = require("express-validator");
 const [parser_ria, pageContent_parser_ria] = require('../utils/parser_ria');
 const [parser_rbk, pageContent_parser_rbk] = require('../utils/parser_rbk');
+const [parser_vesti, pageContent_parser_vesti] = require('../utils/parser_vesti');
 
 router.route('/').get(async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
-  //parser('https://ria.ru/export/rss2/archive/index.xml')
-  let text = await pageContent_parser_ria('https://www.vesti.ru/article/2711858')
+  let text = 'Hello, World!'
 
   return res.send(`<p>${text}</p>`)
 })
@@ -26,6 +26,15 @@ router.route('/get_ria').post(async (req, res) => {
 
 router.route('/get_rbk').post(async (req, res) => {
   let result = await parser_rbk('http://static.feed.rbc.ru/rbc/logical/footer/news.rss')
+  console.log(result)
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  return res
+    .send(result)
+})
+
+router.route('/get_vesti').get(async (req, res) => {
+  let result = await parser_vesti('https://www.vesti.ru/vesti.rss')
   console.log(result)
 
   res.setHeader('Access-Control-Allow-Origin', '*');
