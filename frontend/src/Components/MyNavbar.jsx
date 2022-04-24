@@ -71,8 +71,8 @@ const MyNavbar = () => {
                             {list_nav}
                         </Nav>
                     </Navbar.Collapse>
-                    {admin ? <Button href="/Administration">Админка</Button> : null}
-                    {token ? <Button onClick={handleLogout}>Выйти</Button> : <>
+                    {admin ? <Button href="/Administration" style = {{margin: "10px"}}>Админка</Button> : null}
+                    {token ? <Button style = {{margin: "10px"}} onClick={handleLogout}>Выйти</Button> : <>
                         <Button style = {{margin: "10px"}} href="/login">Войти</Button>
                         <Button href="/register">Регистрация</Button>
                         </>
