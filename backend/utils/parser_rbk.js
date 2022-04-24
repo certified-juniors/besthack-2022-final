@@ -17,7 +17,8 @@ const parser_rbk = async (url) => {
           result[i] = {
             title: $(el).find('title').text(),
             link: $(el).find('link').text().split('\n')[0],
-            description: $(el).find('description').text()
+            description: $(el).find('description').text(),
+            date: $(el).find('pubDate').text()
           }
         })
         resolve(result)
