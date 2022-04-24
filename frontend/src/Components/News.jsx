@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {Card, Col, Container, Row} from "react-bootstrap";
 import NewsList from "./NewsList";
 import {useEffect} from "react";
 import axios from "axios";

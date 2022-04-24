@@ -18,10 +18,10 @@ function ModalButtonNews(myNews){
                     <Modal.Title>{myNews.myNews.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>{myNews.myNews.description}</p>
+                    <p>{myNews.myNews.content}</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <a href = {myNews.myNews.link} style = {{textDecoration: "none", color: "dodgerblue"}}>Смотреть источник</a>
+                    <a href = {myNews.myNews.source} style = {{textDecoration: "none", color: "dodgerblue"}}>Смотреть источник</a>
                 </Modal.Footer>
             </Modal>
         </>
