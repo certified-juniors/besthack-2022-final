@@ -6,13 +6,18 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Administration from "./Components/Administration"
 import {Route, BrowserRouter, Switch} from 'react-router-dom';
+import axios from "axios";
 
+const myaxios = axios.create({
+    baseURL: 'http://127.0.0.1:2001',
+    method: "POST",
+});
 
 const App = () => {
     return (
+      /*<Administration/>*/
         <BrowserRouter>
             <MyNavbar />
-            
             <Switch>
                 <Route exact path="/">
                     <News />
@@ -20,9 +25,9 @@ const App = () => {
                 <Route path="/currency">
                     <Currency />
                 </Route>
-                {/*<Route path="/profile">*/}
-                {/*    <Profile />*/}
-                {/*</Route>*/}
+       {/*         <Route path="/profile">
+                    <Profile />
+                </Route>*/}
                 <Route path="/login">
                     <Login />
                 </Route>

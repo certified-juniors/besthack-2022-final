@@ -34,7 +34,7 @@ const NewsList = (massNews) => {
                                         {myNews.title}
                                     </Card.Title>
 
-                                    <ModalButtonNews myNews={myNews}/>
+                                   <span> <ModalButtonNews myNews={myNews} /> <p style={{marginTop: '20px', MozTextSizeAdjust: 'sm'}}> {myNews.date}</p></span>
                                 </Card.Body>
                             </Card>
                         </Container>

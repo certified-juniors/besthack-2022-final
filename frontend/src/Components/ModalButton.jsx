@@ -24,7 +24,7 @@ function ModalButton(myCurrency) {
               <Form.Label>Количество</Form.Label>
               <Form.Control
                 onChange={event => setValue(event.target.value)}
-                id = "amount"
+
                 type="number"
                 placeholder="0"
                 autoFocus

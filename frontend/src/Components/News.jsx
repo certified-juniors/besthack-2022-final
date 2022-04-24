@@ -1,6 +1,10 @@
 import React, {useState} from "react";
 import {Card, Col, Container, Row} from "react-bootstrap";
 import NewsList from "./NewsList";
+import {useEffect} from "react";
+import axios from "axios";
+
+
 
 const News = () => {
     const [myNews, setMyNews] = useState( [
@@ -36,7 +40,7 @@ const News = () => {
         }
     ])
 
-    const news_list = myNews.map((card, idx) =>
+/*    const news_list = myNews.map((card, idx) =>
 
         <Card key = {'menu item ${idx}'}>
             <Card.body>
@@ -49,7 +53,23 @@ const News = () => {
                 </Card.Link>
             </Card.body>
         </Card>
-    )
+    )*/
+
+    useEffect(() => {
+        const url = 'http://127.0.0.1:2001/get_ria'
+        axios.post(url).then((resp) => {
+
+/*            resp.data.map(data  => (
+
+              )*/
+            console.log(resp.data)
+            setMyNews(resp.data)}
+        )
+    }, [setMyNews])
+/*    const url = 'http://127.0.0.1:2001/get_rbk'
+        axios.post(url).then((resp) => {
+            console.log(resp.data)
+    })*/
 
     return(
         <div>

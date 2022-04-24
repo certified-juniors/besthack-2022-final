@@ -13,10 +13,7 @@ import Switzerland from '../flags/Switzerland.jpg'
 import US from '../flags/US.jpg'
 import Vladimir20 from "../Vladimir20.svg";*/
 
-const myaxios = axios.create({
-  baseURL: 'http://127.0.0.1:2001',
-  method: "POST",
-});
+
 
 
 
@@ -80,15 +77,13 @@ const Currency = () => {
   useEffect(() => {
     const url = 'http://' + config.host + '/last-exchange-rates';
     axios.post(url).then((resp) => {
-      console.log(resp.data)
+
       resp.data.map(data  => (
         data.text = 1 / data.text,
           data.text = data.text.toFixed(4)
       )
     )
-
       setMyCards(resp.data)
-      console.log(myCurrency, 1)
     })
   }, [setMyCards])
 
