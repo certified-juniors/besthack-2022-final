@@ -1,37 +1,47 @@
 import React from "react";
-import {Table} from "react-bootstrap";
+import { Button, Form, Table } from "react-bootstrap";
 
 const Administration = () => {
+    const [admin, setAdmin] = useState(false);
+    const token = localStorage.getItem('token');
+    if (token) {
+        axios("http://" + config.host + "/isAdmin?token=" + token, {
+            method: "POST",
+        }).then(
+            res => {
+                if (res.data.message == "Пользователь администратор") {
+                    setAdmin(true)
+                } else {
+                    window.location.href = '/';
+                }
+            }
+        );
+    } else {
+        window.location.href = '/';
+    }
+
+    const handleUnblockUser = (e) => {
+        e.preventDefault();
+        axios("http://" + config.host + "/unblockUser?id=" + id + "&token=" + token, {
+            method: "POST",
+        }).then(
+            res => {
+                window.location.reload();
+            }
+        );
+    }
     return <div>
-        <Table striped bordered hover size="sm">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Login</th>
-                <th>Email</th>
-                <th>Password</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td colSpan={2}>Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
-            </tbody>
-        </Table>
+        {!admin ? <h1>Пожалуйста, подождите</h1> :
+            <div className="container">
+                <h1>Администратор</h1>
+                <h2>Разюлокировать пользователя</h2>
+                <Form onSubmit={handleUnblockUser}>
+                    <Form.Label text="Введите id пользователя" />
+                    <Form.Control type="text" id="id" />
+                    <Button size="lg" variant="primary" type="submit" />
+                </Form>
+            </div>
+        }
     </div>
 }
 
