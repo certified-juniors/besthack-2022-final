@@ -4,10 +4,12 @@ import News from './Components/News';
 import Currency from "./Components/Currency";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
+import Balance from "./Components/Balance"
 import Administration from "./Components/Administration"
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Profile from "./Components/Profile";
 
 const myaxios = axios.create({
     baseURL: 'http://127.0.0.1:2001',
@@ -32,9 +34,9 @@ const App = () => {
                 <Route path="/currency">
                     <Currency />
                 </Route>
-                {/*         <Route path="/profile">
+                <Route path="/profile">
                     <Profile />
-                </Route>*/}
+                </Route>
                 <Route path="/login">
                     <Login />
                 </Route>

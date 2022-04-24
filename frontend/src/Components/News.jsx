@@ -41,20 +41,7 @@ const News = () => {
         }
     ])
 
-/*    const news_list = myNews.map((card, idx) =>
 
-        <Card key = {'menu item ${idx}'}>
-            <Card.body>
-                <Card.Title>
-                    {card.title}
-                </Card.Title>
-
-                <Card.Link>
-                    {card.link}
-                </Card.Link>
-            </Card.body>
-        </Card>
-    )*/
 
     useEffect(() => {
         setInterval(() => {

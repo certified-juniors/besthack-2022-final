@@ -53,7 +53,7 @@ const MyNavbar = () => {
                                 className="d-inline-block align-top"
                             />{' '}
 
-                            Кабанчик
+                            <a className="disabled" style = {{textDecoration: "none", color: "#000000"}} href = "/">Кабанчик</a>
 
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="navbarScroll"/>
@@ -67,11 +67,11 @@ const MyNavbar = () => {
                             </Nav>
                         </Navbar.Collapse>
 
+                        <Button href="/Administration">Админка</Button>
+
                         <Button onClick = {() => (setToken( null))}  >
                             Выйти
                         </Button>
-
-                        <a href="/administration">admin</a>
 
                     </Container>
                 </Navbar>
@@ -92,7 +92,7 @@ const MyNavbar = () => {
                                 className="d-inline-block align-top"
                             />{' '}
 
-                            Кабанчик
+                            <a href = "/" style = {{textDecoration: "none"}}>Кабанчик</a>
 
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="navbarScroll"/>
@@ -118,7 +118,7 @@ const MyNavbar = () => {
     } else {
         return (
             <div>
-                <Navbar expand="lg" style={{background: 'linear-gradient(45deg, #EECFBA, #C5DDE8)'}}>
+                <Navbar expand="lg" style={{background: 'linear-gradient(45deg, #EECFBA, #C5DDE8)', color: "black"}}>
                     <Container fluid>
                         <Navbar.Brand href="#">
                             <img
@@ -129,7 +129,7 @@ const MyNavbar = () => {
                                 className="d-inline-block align-top"
                             />{' '}
 
-                            Кабанчик
+                            <a href = "/" style = {{textDecoration: "none", color: "black"}}>Кабанчик</a>
 
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="navbarScroll"/>
