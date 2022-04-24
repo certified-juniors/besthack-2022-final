@@ -3,6 +3,7 @@ import { Button, Form, Table } from "react-bootstrap";
 import config from "../config";
 import axios from 'axios';
 import { useState } from "react";
+import Balance from "./Balance";
 
 
 const Administration = () => {
@@ -13,7 +14,7 @@ const Administration = () => {
             method: "POST",
         }).then(
             res => {
-                if (res.data.message == "Пользователь администратор") {
+                if (res.data.message === "Пользователь администратор") {
                     setAdmin(true)
                 } else {
                     window.location.href = '/';
@@ -40,10 +41,11 @@ const Administration = () => {
                 <h1>Администратор</h1>
                 <h2>Разблокировать пользователя</h2>
                 <Form onSubmit={handleUnblockUser}>
-                    <Form.Label text="Введите id пользователя" />
-                    <Form.Control type="text" id="id" />
-                    <Button size="lg" variant="primary" type="submit" />
+                    <Form.Control type="text" id="id" placeholder="Введите логин разблокируемого"/>
+                    <Button size="lg" variant="primary" type="submit">Разблокировать</ Button>
                 </Form>
+                <h2>Пополнить баланс пользователю</h2>
+                <Balance />
             </div>
         }
     </div>

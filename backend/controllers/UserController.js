@@ -103,6 +103,19 @@ class UserController {
             res.status(400).json({ message: 'Login error' })
         }
     }
+
+    async getUserByLogin(req, res) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        try {
+            const { login } = req.query;
+            const user = (await get(child(ref(db), 'users/' + login))).val();
+            if (!user) return res.status(400).json({ message: "Пользователь не найден" });
+            return res.status(200).json(user);
+        } catch (e) {
+            console.log(e)
+            res.status(400).json({ message: 'Login error' })
+        }
+    }
 }
 
 module.exports = new UserController();
