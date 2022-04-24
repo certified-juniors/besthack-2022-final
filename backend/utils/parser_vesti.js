@@ -52,4 +52,4 @@ const pageContent_parser_vesti = async (url) => {
   })
 }
 
-module.exports = [parser_vesti, pageContent_parser_vesti]
+module.exports = parser_vesti

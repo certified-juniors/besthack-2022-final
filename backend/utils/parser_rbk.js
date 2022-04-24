@@ -50,4 +50,4 @@ const pageContent_parser_rbk = async (url) => {
   })
 }
 
-module.exports = [parser_rbk, pageContent_parser_rbk]
+module.exports = parser_rbk
