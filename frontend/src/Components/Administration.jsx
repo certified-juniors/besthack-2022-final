@@ -41,9 +41,8 @@ const Administration = () => {
                 <h1>Администратор</h1>
                 <h2>Разблокировать пользователя</h2>
                 <Form onSubmit={handleUnblockUser}>
-                    <Form.Label text="Введите id пользователя" />
-                    <Form.Control type="text" id="id" />
-                    <Button size="lg" variant="primary" type="submit" />
+                    <Form.Control type="text" id="id" placeholder="Введите логин разблокируемого"/>
+                    <Button size="lg" variant="primary" type="submit">Разблокировать</ Button>
                 </Form>
                 <h2>Пополнить баланс пользователю</h2>
                 <Balance />
