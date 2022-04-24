@@ -38,7 +38,7 @@ const Administration = () => {
         {!admin ? <h1>Пожалуйста, подождите</h1> :
             <div className="container">
                 <h1>Администратор</h1>
-                <h2>Разюлокировать пользователя</h2>
+                <h2>Разблокировать пользователя</h2>
                 <Form onSubmit={handleUnblockUser}>
                     <Form.Label text="Введите id пользователя" />
                     <Form.Control type="text" id="id" />
