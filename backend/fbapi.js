@@ -18,7 +18,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-onValue
-
 module.exports = {app, db};
 console.log("Firebase initialized");

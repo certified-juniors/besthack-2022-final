@@ -3,11 +3,7 @@ import {Card} from "react-bootstrap";
 import {useState} from "react";
 import CurrencyList from "./CurrencyList";
 import axios from "axios";
-
-const myaxios = axios.create({
-  baseURL: 'http://127.0.0.1:2001',
-  method: "POST",
-});
+import config from "../config";
 
 const Currency = () => {
 
@@ -65,7 +61,7 @@ const Currency = () => {
   // )
 
   useEffect(() => {
-    const url = 'http://127.0.0.1:2001/last-exchange-rates'
+    const url = 'http://' + config.host + '/last-exchange-rates';
     axios.post(url).then((resp) => {
       console.log(resp.data)
       resp.data.map(data  => (
