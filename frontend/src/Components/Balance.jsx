@@ -38,6 +38,9 @@ const Balance = () =>
             </Form.Group>
           </Form>
         </Modal.Body>
+          <Button variant = "primary" onClick = {handleShow}>
+                Пополнить баланс
+          </Button>
       </Modal>
 
       setBalance(balance+value)
