@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Modal, Form} from "react-bootstrap";
+import axios from 'axios';
+import config from "../config"
 
 function ModalButton1(myCurrency) {
   const [show, setShow] = useState(false);
@@ -7,6 +9,13 @@ function ModalButton1(myCurrency) {
 
   const handleClose = () => {
     setShow(false);
+    const currency = myCurrency.myCurrency.title;
+    const token = localStorage.getItem('token');
+    console.log(currency, value, token);
+    const url = 'http://' + config.host + '/sell-rate?currency=' + currency + '&amount=' + value + '&token=' + token;
+    axios.post(url).then((resp) => {
+      console.log(resp.data);
+    })
   }
   const handleShow = () => setShow(true);
 

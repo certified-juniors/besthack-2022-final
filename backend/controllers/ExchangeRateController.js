@@ -73,8 +73,8 @@ class ExchangeRateController {
                     message: 'Not enough money'
                 });
             }
-            user.balance[currency] = user.balance[currency] + amount;
-            user.balance["RUB"] = user.balance["RUB"] - amount / this.lastValues[currency];
+            user.balance[currency] = user.balance[currency] - amount;
+            user.balance["RUB"] = user.balance["RUB"] + amount / this.lastValues[currency];
             await set(ref(db, 'users/' + login), user);
             logBuyRate(user, req, currency, amount);
             res.status(200).json({
