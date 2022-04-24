@@ -10,39 +10,39 @@ const { logRegister, logLogin } = require('./EntryController');
 
 class UserController {
     async register(req, res) {
-        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Origin', '*');
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
-                return res.status(400).json({ message: "Ошибка при регистрации", errors })
+                return res.send({ message: "Ошибка при регистрации", errors })
             }
-            const { email, login, password } = req.body;
-            console.log(req.body);
+
+            console.log(req.query);
+            const { email, login, password } = req.query;
             const candidate = (await get(child(ref(db), 'users/' + login))).val();
             if (candidate) {
-                return res.status(400).json({ message: "Пользователь с таким именем уже существует" })
+                return res.send({ message: "Пользователь с таким именем уже существует" })
             }
             const hashed_email = md5(email);
             const candidateByEmail = (await get(child(ref(db), "loginbyemail/" + hashed_email))).val();
             if (candidateByEmail) {
-                return res.status(400).json({ message: "Пользователь с такой почтой уже существует" })
+                return res.send({ message: "Пользователь с такой почтой уже существует" })
             }
             const hashPassword = bcrypt.hashSync(password, 7);
             const user = new User(login, email, hashPassword, new Date().getTime(), User.ROLE.CLIENT);
             await set(ref(db, "loginbyemail/" + hashed_email), login);
             await set(ref(db, 'users/' + login), user);
             logRegister(user, req);
-            res.status(200).json({ message: "Пользователь успешно зарегистрирован" });
+            res.send({ message: "Пользователь успешно зарегистрирован" });
         } catch (e) {
             console.log(e)
-            res.status(400).json({ message: 'Registration error' })
+            res.send({ message: 'Registration error' })
         }
     }
 
     async login(req, res) {
-        res.setHeader('Access-Control-Allow-Origin', '*');
         try {
-            const { loginOrEmail, password } = req.body;
+            const { loginOrEmail, password } = req.query;
             const isLogin = loginOrEmail.indexOf('@') === -1;
             let login;
             if (!isLogin) {

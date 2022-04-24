@@ -7,10 +7,12 @@ const [parser_ria, pageContent_parser_ria] = require('../utils/parser_ria');
 const [parser_rbk, pageContent_parser_rbk] = require('../utils/parser_rbk');
 
 router.route('/').get(async (req, res) => {
-  let text = '<h1>Hello!</h1>';
-  return res
-    .status(200)
-    .send(`<p>${text}</p>`)
+  res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  //parser('https://ria.ru/export/rss2/archive/index.xml')
+  let text = await pageContent_parser_ria('https://www.vesti.ru/article/2711858')
+
+  return res.send(`<p>${text}</p>`)
 })
 
 router.route('/get_ria').post(async (req, res) => {
@@ -48,7 +50,7 @@ router.route('/register').post(userController.register,
       if (value.search(/\d/) == -1) {
         throw new Error('Password must contain at least one digit')
       }
-      if (value.search(/\[\~\!\@\#\$\%\^\&\*\_\\\-\+\=\'\;\\\{\}\]\:\"\.\ \<\>\,\.\?\ \/]/) == -1) {
+      if (value.search(/[^a-zA-Z0-9а-яА-Я]]/) == -1) {
         throw new Error('Password must contain at least one special character')
       }
       if (value.search(/[a-zA-Z0-9а-яА-Я]/) == -1) {
@@ -56,6 +58,7 @@ router.route('/register').post(userController.register,
       }
       return true
     })
-  ]);
+  ]
+  );
 router.route('/last-exchange-rates').post(exchangeController.getLastExchangeRates.bind(exchangeController));
 module.exports = router;

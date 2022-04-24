@@ -3,6 +3,7 @@ import {Card} from "react-bootstrap";
 import {useState} from "react";
 import CurrencyList from "./CurrencyList";
 import axios from "axios";
+import config from "../config";
 
 /*import China from '../flags/China.jpg'
 import EU from '../flags/EU.jpg'
@@ -77,7 +78,7 @@ const Currency = () => {
   // )
 
   useEffect(() => {
-    const url = 'http://127.0.0.1:2001/last-exchange-rates'
+    const url = 'http://' + config.host + '/last-exchange-rates';
     axios.post(url).then((resp) => {
       console.log(resp.data)
       resp.data.map(data  => (
