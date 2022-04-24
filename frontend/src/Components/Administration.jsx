@@ -1,5 +1,9 @@
 import React from "react";
 import { Button, Form, Table } from "react-bootstrap";
+import config from "../config";
+import axios from 'axios';
+import { useState } from "react";
+
 
 const Administration = () => {
     const [admin, setAdmin] = useState(false);
@@ -22,7 +26,7 @@ const Administration = () => {
 
     const handleUnblockUser = (e) => {
         e.preventDefault();
-        axios("http://" + config.host + "/unblockUser?id=" + id + "&token=" + token, {
+        axios("http://" + config.host + "/unblockUser?id=" + e.target.id + "&token=" + token, {
             method: "POST",
         }).then(
             res => {
