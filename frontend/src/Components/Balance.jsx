@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Modal, Form} from "react-bootstrap";
+import {useEffect} from "react";
 
 
 const Balance = () =>
@@ -10,7 +11,11 @@ const Balance = () =>
 
   const [balance, setBalance] = useState(0)
 
-  const handleClose = () => setShow(false);
+  const handleClose = () =>
+  {
+    setBalance(+value+balance)
+    setShow(false);
+  }
   const handleShow = () => setShow(true);
 
   return (
@@ -34,16 +39,18 @@ const Balance = () =>
                 type="number"
                 placeholder="0"
                 autoFocus
+
               />
             </Form.Group>
           </Form>
         </Modal.Body>
-          <Button variant = "primary" onClick = {handleShow}>
+          <Button  variant = "primary" onClick = {handleClose}>
                 Пополнить баланс
           </Button>
       </Modal>
 
-      setBalance(balance+value)
+
+
     </div>
   )
 }
