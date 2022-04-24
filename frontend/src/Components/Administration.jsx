@@ -13,7 +13,7 @@ const Administration = () => {
             method: "POST",
         }).then(
             res => {
-                if (res.data.message == "Пользователь администратор") {
+                if (res.data.message === "Пользователь администратор") {
                     setAdmin(true)
                 } else {
                     window.location.href = '/';

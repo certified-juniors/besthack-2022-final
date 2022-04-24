@@ -24,10 +24,12 @@ const App = () => {
         document.body.appendChild(script);
     }, [])
     return (
-        /*<Administration/>*/
         <BrowserRouter>
             <MyNavbar />
             <Switch>
+                <Route exact path="/Administration">
+                    <Administration />
+                </Route>
                 <Route exact path="/">
                     <News />
                 </Route>
