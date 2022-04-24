@@ -68,7 +68,7 @@ const MyNavbar = () => {
                         </Navbar.Collapse>
 
                         <a href="/administration">admin</a>
-                        <Button href="/register">
+                        <Button onClick = {() => (setToken( null))}  >
                             Выйти
                         </Button>
                     </Container>
