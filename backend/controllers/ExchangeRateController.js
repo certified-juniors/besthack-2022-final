@@ -4,6 +4,7 @@ const { push, set, ref, get, child, equalTo, query, orderByValue, onValue, order
 const parser_currency = require('../utils/parser');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const { logBuyRate } = require('./EntryController');
 const secret = require('../config').secret;
 
 class ExchangeRateController {
@@ -25,7 +26,7 @@ class ExchangeRateController {
             this.interval = setInterval(this.updateExchangeRate.bind(this), this.updateInterval);
         });
     }
-
+    
     async buyRate(req, res) {
         try {
             const { currency, amount, token } = req.query;
@@ -43,6 +44,12 @@ class ExchangeRateController {
                 });
             }
             user.balance["RUB"] = user.balance["RUB"] - amount / this.lastValues[currency];
+            user.balance[currency] = user.balance[currency] + amount;
+            await set(ref(db, 'users/' + login), user);
+            logBuyRate(user, req, currency, amount);
+            res.status(200).json({
+                message: 'Success'
+            });
         } catch (error) {
             console.error(error);
         }
