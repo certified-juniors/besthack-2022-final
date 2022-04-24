@@ -67,10 +67,12 @@ const MyNavbar = () => {
                             </Nav>
                         </Navbar.Collapse>
 
-                        <a href="/administration">admin</a>
                         <Button onClick = {() => (setToken( null))}  >
                             Выйти
                         </Button>
+
+                        <a href="/administration">admin</a>
+
                     </Container>
                 </Navbar>
 
