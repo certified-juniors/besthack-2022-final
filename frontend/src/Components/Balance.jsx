@@ -34,7 +34,7 @@ const Balance = (props) => {
                     <Card.Text>
                       Ваш баланс: {user.balance[myCurrency]}
                     </Card.Text>
-                    {myCurrency.title == "RUB" ? "" : <Button myCurrency={myCurrency} />}
+                    {myCurrency == "RUB" ? "" : <Button myCurrency={myCurrency}>Продать</Button>}
                   </Card.Body>
                 </Card>
               </Container>
