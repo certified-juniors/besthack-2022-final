@@ -25,7 +25,7 @@ const MyNavbar = () => {
 
     return(
         <div>
-            <Navbar bg="light" expand="lg">
+            <Navbar expand="lg">
                 <Container fluid>
                     <Navbar.Brand href="#">
                         <img
@@ -57,6 +57,7 @@ const MyNavbar = () => {
                     </Button>
                 </Container>
             </Navbar>
+
         </div>
     )
 }

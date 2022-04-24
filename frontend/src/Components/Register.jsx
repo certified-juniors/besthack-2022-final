@@ -20,6 +20,7 @@ class Register extends React.Component {
     }
 
     handler(e) {
+
         e.preventDefault();
         const { login, email, password } = this.state;
         const url = 'http://' + config.host + '/register' + '?login=' + login + '&email=' + email + '&password=' + password;
@@ -45,7 +46,6 @@ class Register extends React.Component {
         return (
             <Container>
                 <h2 className='text-center'>Регистрация</h2>
-
                 <Form onSubmit={this.handler}>
                     <Form.Group className="mb-3" >
                         <Form.Label>Введите Логин</Form.Label>

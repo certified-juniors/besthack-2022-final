@@ -5,10 +5,27 @@ import CurrencyList from "./CurrencyList";
 import axios from "axios";
 import config from "../config";
 
+/*import China from '../flags/China.jpg'
+import EU from '../flags/EU.jpg'
+import GB from '../flags/GB.jpg'
+import Rus from '../flags/Rus.jpg'
+import Switzerland from '../flags/Switzerland.jpg'
+import US from '../flags/US.jpg'
+import Vladimir20 from "../Vladimir20.svg";*/
+
+const myaxios = axios.create({
+  baseURL: 'http://127.0.0.1:2001',
+  method: "POST",
+});
+
+
+
 const Currency = () => {
 
   const [myCurrency, setMyCards] = useState([
     {
+
+
       title: 'Currency num.1',
       img: ' ',
       text: 'exchange rate 1',
@@ -71,6 +88,7 @@ const Currency = () => {
     )
 
       setMyCards(resp.data)
+      console.log(myCurrency, 1)
     })
   }, [setMyCards])
 

@@ -12,6 +12,7 @@ const App = () => {
     return (
         <BrowserRouter>
             <MyNavbar />
+            
             <Switch>
                 <Route exact path="/">
                     <News />
