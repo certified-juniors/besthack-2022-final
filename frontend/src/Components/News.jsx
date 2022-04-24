@@ -36,16 +36,14 @@ const News = () => {
         }
     ])
 
-    const news_list = myNews.map((card) =>
+    const news_list = myNews.map((card, idx) =>
 
-        <Card>
+        <Card key = {'menu item ${idx}'}>
             <Card.body>
                 <Card.Title>
                     {card.title}
                 </Card.Title>
-                <Card.Text>
-                    {card.text}
-                </Card.Text>
+
                 <Card.Link>
                     {card.link}
                 </Card.Link>

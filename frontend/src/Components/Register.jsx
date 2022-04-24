@@ -16,7 +16,6 @@ class Register extends React.Component {
 
     handler(e) {
 
-        alert(this.state.login + this.state.email + this.state.password);
         e.preventDefault();
     }
 
@@ -26,7 +25,7 @@ class Register extends React.Component {
             <Container>
                 <h2 className='text-center'>Регистрация</h2>
 
-                <Form>
+                <Form onSubmit={this.handler()}>
                     <Form.Group className="mb-3" >
                         <Form.Label>Введите Логин</Form.Label>
                         <Form.Control id="login" type="login" placeholder="Логин"/>
@@ -34,7 +33,7 @@ class Register extends React.Component {
 
                     <Form.Group className="mb-3">
                         <Form.Label>Введите Email</Form.Label>
-                        <Form.Control id="email" type="email" placeholder="name@example.com"/>
+                        <Form.Control id="email" type="email" placeholder="name@example.com" onChange={() => this.setState(this.state.value)}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3">

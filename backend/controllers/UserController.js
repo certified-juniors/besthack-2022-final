@@ -17,7 +17,7 @@ class UserController {
                 return res.status(400).json({ message: "Ошибка при регистрации", errors })
             }
             const { email, login, password } = req.body;
-            console.log(login);
+            console.log(req.body);
             const candidate = (await get(child(ref(db), 'users/' + login))).val();
             if (candidate) {
                 return res.status(400).json({ message: "Пользователь с таким именем уже существует" })

@@ -7,9 +7,9 @@ const Administration = () => {
             <thead>
             <tr>
                 <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
+                <th>Login</th>
+                <th>Email</th>
+                <th>Password</th>
             </tr>
             </thead>
             <tbody>
