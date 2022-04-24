@@ -38,22 +38,25 @@ class Login extends React.Component {
     return (
       <Container>
         <h2 className='text-center'>Вход</h2>
-
-        <Form onSubmit={this.handler}>
-          <Form.Group className="mb-3">
-            <Form.Label>Введите Логин или Email</Form.Label>
-            <Form.Control type="login" placeholder="Логин или почта" id="loginOrEmail" onChange={this.handleLoginOrEmailChange}/>
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Введите пароль</Form.Label>
-            <Form.Control type="password" placeholder="Пароль" id='password' onChange={this.handlePasswordChange}/>
-          </Form.Group>
-
-          <Button size="xxl" variant="primary" type="submit">
-            Вход
-          </Button>
-        </Form>
+        <div className="vstack gap-2 col-md-5 mx-auto">
+          <Form onSubmit={this.handler}>
+            <div className="col-auto">
+            <Form.Group className="mb-3">
+              <Form.Label>Введите Логин или Email</Form.Label>
+              <Form.Control type="login" placeholder="Логин или почта" id="loginOrEmail" onChange={this.handleLoginOrEmailChange}/>
+            </Form.Group>
+            </div>
+            <div className="col-auto">
+              <Form.Group className="mb-3">
+                <Form.Label>Введите пароль</Form.Label>
+                <Form.Control type="password" placeholder="Пароль" id='password' onChange={this.handlePasswordChange}/>
+              </Form.Group>
+            </div>
+            <Button size="xxl" variant="primary" type="submit">
+              Вход
+            </Button>
+          </Form>
+        </div>
 
 
       </Container>
