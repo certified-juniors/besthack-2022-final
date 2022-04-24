@@ -12,12 +12,13 @@ import Rus from '../flags/Rus.jpg'
 import Switzerland from '../flags/Switzerland.jpg'
 import US from '../flags/US.jpg'
 import Vladimir20 from "../Vladimir20.svg";
+import CurrencyList1 from "./CurrencyList1";
 
 
 
 
 
-const Currency = () => {
+const Currency1 = () => {
 
   const [myCurrency, setMyCards] = useState([
     {
@@ -86,9 +87,9 @@ const Currency = () => {
 
   return (
     <div>
-      <CurrencyList myCurrency={myCurrency}/>
+      <CurrencyList1 myCurrency={myCurrency}/>
     </div>
   )
 }
 
-export default Currency;
+export default Currency1;

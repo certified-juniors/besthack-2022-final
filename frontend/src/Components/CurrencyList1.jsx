@@ -4,8 +4,9 @@ import Currency from "./Currency";
 import ModalButton from "./ModalButton";
 
 import Rus from '../flags/Rus.jpg'
+import ModalButton1 from "./ModalButton1";
 
-const CurrencyList = (massCurrency) => {
+const CurrencyList1 = (massCurrency) => {
   return (
     <>
       <Container fluid>
@@ -22,7 +23,7 @@ const CurrencyList = (massCurrency) => {
                       <Card.Text>
                        Текущий курс: {myCurrency.text}
                       </Card.Text>
-                      {myCurrency.title === "RUB" ? "" : <ModalButton myCurrency={myCurrency}/>}
+                      {myCurrency.title === "RUB" ? "" : <ModalButton1 myCurrency={myCurrency}/>}
                     </div>
                     <div className="col-md-5 d-md-block d-none">
                       <Image fluid src={myCurrency.img} className="rounded-start" />
@@ -41,4 +42,4 @@ const CurrencyList = (massCurrency) => {
 }
 
 
-export default CurrencyList;
+export default CurrencyList1;
