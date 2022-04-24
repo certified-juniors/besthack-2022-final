@@ -90,7 +90,7 @@ class ArticleController {
         res.header('Access-Control-Allow-Origin', '*');
         try {
             const {amount} = req.query;
-            const articles = (await get(query(ref(db, 'articles/'), limitToFirst(+amount)))).val() || this.lastArticles;
+            const articles = this.lastArticles.slice(0, amount);
 
             res.send(articles);
         } catch (e) {

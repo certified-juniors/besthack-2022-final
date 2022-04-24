@@ -9,8 +9,9 @@ import config from "../config";
 const News = () => {
     const [myNews, setMyNews] = useState([]);
     const [loaded, setLoaded] = useState(false)
+    const [intervalId, setIntervalId] = useState(null);
     useEffect(() => {
-        setInterval(() => {
+        setIntervalId(setInterval(() => {
         const url = 'http://' + config.host + '/get_news?amount=20';
         axios.post(url).then((resp) => {
             let news =[];
@@ -20,7 +21,7 @@ const News = () => {
             setMyNews(news);
             setLoaded(true);
         })
-    }, 1000*10)}, []);
+    }, 1000*10))}, []);
 
     return(
         <div>
