@@ -17,6 +17,7 @@ router.route('/get_ria').post(async (req, res) => {
   let result = parser_ria('https://ria.ru/export/rss2/archive/index.xml')
   console.log(result)
 
+  res.setHeader('Access-Control-Allow-Origin', '*');
   return res
     .send(result)
 })
@@ -25,8 +26,9 @@ router.route('/get_rbk').post(async (req, res) => {
   let result = await parser_rbk('http://static.feed.rbc.ru/rbc/logical/footer/news.rss')
   console.log(result)
 
-    return res
-      .send(result)
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  return res
+    .send(result)
 })
 
 router.route('/login').post(userController.login);
