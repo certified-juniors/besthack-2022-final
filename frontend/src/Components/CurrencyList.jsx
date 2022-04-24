@@ -14,7 +14,7 @@ const CurrencyList = (massCurrency) => {
           <Col xs sm="4">
             <Container fluid style={{marginTop: '30px', marginLeft: '15px', padding: '15px'}}>
 
-              <Card style={{width: '25rem', height: '10rem', borderColor: "black", backgroundColor: "#f1efef"}}>
+              <Card style={{width: '25rem', height: '10rem', borderColor: "black", backgroundColor: "#f3f2f2"}}>
                 <Card.Body>
                   <Card.Title style = {{marginTop: '6px'}}>{myCurrency.title}</Card.Title>
                   <div className="row g-0">
