@@ -11,7 +11,6 @@ const CurrencyList = (massCurrency) => {
       <Container fluid>
       <Row className="justify-content-md-center">
         {massCurrency.myCurrency.map(myCurrency => (
-
           <Col xs sm="4">
             <Container fluid style={{marginTop: '30px', marginLeft: '15px', padding: '15px'}}>
 
@@ -22,7 +21,7 @@ const CurrencyList = (massCurrency) => {
                   <Card.Text>
                    Текущий курс: {myCurrency.text}
                   </Card.Text>
-                  <ModalButton myCurrency={myCurrency}/>
+                  {myCurrency.title == "RUB" ? "" : <ModalButton myCurrency={myCurrency}/>}
                 </Card.Body>
               </Card>
             </Container>
