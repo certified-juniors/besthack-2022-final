@@ -41,6 +41,7 @@ class UserController {
     }
 
     async login(req, res) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
         try {
             const { loginOrEmail, password } = req.query;
             const isLogin = loginOrEmail.indexOf('@') === -1;
