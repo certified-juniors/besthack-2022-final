@@ -8,6 +8,7 @@ const {} = require('../utils/parser')
 
 class ArticleController {
     constructor() {
+        this.lastArticles = [];
         get(ref(db, 'config/sources')).then(snapshot => {
             if (snapshot.val()) {
                 this.sources = snapshot.val();
@@ -36,6 +37,9 @@ class ArticleController {
                 }
             });
         });
+        this.updateArticles('vesti');
+        this.updateArticles('rbk');
+        this.updateArticles('ria');
     }
     async updateArticles(source) {
         switch (source) {
@@ -48,7 +52,7 @@ class ArticleController {
                       news.link,
                       news.date
                     )
-                    await set(ref(db, 'articles/' + news.title), article)
+                    this.lastArticles.push(article);
                 }
                 break;
 
@@ -61,10 +65,9 @@ class ArticleController {
                       news.link,
                       news.date
                     )
-                    await set(ref(db, 'articles/' + news.title), article)
+                    this.lastArticles.push(article);
                 }
                 break;
-
             case 'rbk':
                 const rbk_news = await parser_rbk('http://static.feed.rbc.ru/rbc/logical/footer/news.rss')
                 for (const news of rbk_news) {
@@ -74,18 +77,20 @@ class ArticleController {
                       news.link,
                       news.date
                     )
-                    await set(ref(db, 'articles/' + news.title), article)
+                    this.lastArticles.push(article);
                 }
                 break;
             default:
                 break;
+            
         }
+        await set(ref(db, 'articles'), this.lastArticles);
     }
     async getLastArticles(req, res) {
-        console.log(req.query)
+        res.header('Access-Control-Allow-Origin', '*');
         try {
             const {amount} = req.query;
-            const articles = (await get(query(ref(db, 'articles/'), limitToFirst(amount)))).val();
+            const articles = (await get(query(ref(db, 'articles/'), limitToFirst(+amount)))).val() || this.lastArticles;
 
             res.send(articles);
         } catch (e) {

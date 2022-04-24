@@ -12,11 +12,11 @@ router.route('/').get(async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
   let text = 'Hello, World!'
-
   return res.send(`<p>${text}</p>`)
 })
 
-router.route('/get_news').get(articleController.getLastArticles)
+
+router.route('/get_news').post(articleController.getLastArticles.bind(articleController))
 
 router.route('/get_ria').post(async (req, res) => {
   let result = await parser_ria('https://ria.ru/export/rss2/archive/index.xml')

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Container, Card, Col, Row, Pagination, Modal} from "react-bootstrap";
+import React, { useState } from 'react';
+import { Container, Card, Col, Row, Pagination, Modal } from "react-bootstrap";
 import ModalButtonNews from "./ModalButtonNews"
 
 const NewsList = (massNews) => {
@@ -13,10 +13,14 @@ const NewsList = (massNews) => {
             padTo2Digits(date.getDate()),
             padTo2Digits(date.getMonth() + 1),
             date.getFullYear(),
-        ].join('/');
+        ].join('/') + ' ' + [
+            padTo2Digits(date.getHours()),
+            padTo2Digits(date.getMinutes()),
+            padTo2Digits(date.getSeconds()),
+        ].join(':');
     }
 
-// 👇 24/10/2021 (mm/dd/yyyy)
+    // 👇 24/10/2021 (mm/dd/yyyy)
 
 
     // let items = [];
@@ -40,24 +44,24 @@ const NewsList = (massNews) => {
                 {massNews.myNews.map(myNews => (
 
                     <Col lg-4>
-                        <Container fluid style={{marginTop: "20px"}}>
+                        <Container fluid style={{ marginTop: "20px" }}>
 
-                            <Card style={{width: '26em', height: '15em'}}>
+                            <Card style={{ width: '26em', height: '15em' }}>
 
-                                <Card.Body style={{marginBottom: '10px'}}>
-                                    <Card.Title style={{margin: "10px"}}>
+                                <Card.Body style={{ marginBottom: '10px' }}>
+                                    <Card.Title style={{ margin: "10px" }}>
                                         {myNews.title}
                                     </Card.Title>
-                                    <div style = {{position: "absolute", bottom: "0"}}>
+                                    <div style={{ position: "absolute", bottom: "0" }}>
                                         <Row>
                                             <Col>
                                                 <p style={{
                                                     marginTop: '10px',
                                                     MozTextSizeAdjust: 'sm'
-                                                }}> {(formatDate(new Date(myNews.date)))}</p>
+                                                }}> {(formatDate(new Date(myNews.created_at), 'dd/mm/yyyy hh:mm:ss'))}</p>
                                             </Col>
-                                            <Col style = {{marginLeft: '160px'}}>
-                                                <ModalButtonNews myNews={myNews} className = "justify-content-end"/>
+                                            <Col style={{ marginLeft: '160px' }}>
+                                                <ModalButtonNews myNews={myNews} className="justify-content-end" />
                                             </Col>
                                         </Row>
                                     </div>

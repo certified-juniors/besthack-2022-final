@@ -3,6 +3,7 @@ import {Card, Col, Container, Row} from "react-bootstrap";
 import NewsList from "./NewsList";
 import {useEffect} from "react";
 import axios from "axios";
+import config from "../config";
 
 
 
@@ -56,20 +57,16 @@ const News = () => {
     )*/
 
     useEffect(() => {
-        const url = 'http://127.0.0.1:2001/get_news?amount=a'
+        setInterval(() => {
+        const url = 'http://' + config.host + '/get_news?amount=20';
         axios.post(url).then((resp) => {
-
-/*            resp.data.map(data  => (
-
-              )*/
-            console.log(resp.data)
-            setMyNews(resp.data)}
-        )
-    }, [setMyNews])
-/*    const url = 'http://127.0.0.1:2001/get_rbk'
-        axios.post(url).then((resp) => {
-            console.log(resp.data)
-    })*/
+            let news =[];
+            Object.keys(resp.data).forEach(key => {
+                news.push(resp.data[key]);
+            });
+            setMyNews(news);
+        })
+    }, 1000*10)}, []);
 
     return(
         <div>
