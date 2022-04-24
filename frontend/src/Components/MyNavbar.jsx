@@ -1,7 +1,8 @@
 //Navigation bar
 import React from 'react';
 import Vladimir20 from '../Vladimir20.svg';
-import {Button, Container, Nav, Navbar} from "react-bootstrap";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import axios from 'axios';
 
 const myNavs = [
     {
@@ -19,21 +20,33 @@ const myNavs = [
 ]
 
 const MyNavbar = () => {
-    let list_nav = myNavs.map( (nav) =>
+    let list_nav = myNavs.map((nav) =>
         <Nav.Link href={nav.link}>{nav.title}</Nav.Link>
     )
-
-    return(
+    const [admin, setAdmin] = useState(false)
+    const token = localStorage.getItem('token');
+    if (token) {
+        axios("http://" + config.host + "/isAdmin?token=" + token, {
+            method: "POST",
+        }).then(
+            res => {
+                if (res.data.message == "Пользователь администратор") {
+                    setAdmin(true)
+                }
+            }
+        );
+    }
+    return (
         <div>
             <Navbar expand="lg">
                 <Container fluid>
                     <Navbar.Brand href="#">
                         <img
-                          alt=""
-                          src={Vladimir20}
-                          width="35"
-                          height="35"
-                          className="d-inline-block align-top"
+                            alt=""
+                            src={Vladimir20}
+                            width="35"
+                            height="35"
+                            className="d-inline-block align-top"
                         />{' '}
 
                         Кабанчик
@@ -49,10 +62,10 @@ const MyNavbar = () => {
                             {list_nav}
                         </Nav>
                     </Navbar.Collapse>
-                    <Button href = "/login" style = {{marginRight: '10px'}}>
+                    <Button href="/login" style={{ marginRight: '10px' }}>
                         Вход
                     </Button>
-                    <Button href = "/register">
+                    <Button href="/register">
                         Регистрация
                     </Button>
                 </Container>

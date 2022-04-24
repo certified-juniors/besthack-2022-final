@@ -73,6 +73,21 @@ class UserController {
             res.status(400).json({ message: 'Login error' })
         }
     }
+
+    async isAdmin(req, res) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        try {
+            const { token } = req.query;
+            const decoded = jwt.verify(token, secret);
+            const user = (await get(child(ref(db), 'users/' + decoded.login))).val();
+            if (!user) return res.status(400).json({ message: "Пользователь не найден" });
+            if (user.role !== User.ROLE.ADMIN) return res.status(400).json({ message: "Пользователь не администратор" });
+            return res.status(200).json({ message: "Пользователь администратор" });
+        } catch (e) {
+            console.log(e)
+            res.status(400).json({ message: 'Login error' })
+        }
+    }
 }
 
 module.exports = new UserController();

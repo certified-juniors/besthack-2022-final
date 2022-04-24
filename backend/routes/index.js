@@ -70,4 +70,5 @@ router.route('/register').post(userController.register,
   ]
   );
 router.route('/last-exchange-rates').post(exchangeController.getLastExchangeRates.bind(exchangeController));
+router.route('/isAdmin').post(userController.isAdmin.bind(userController));
 module.exports = router;
