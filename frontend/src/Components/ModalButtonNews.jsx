@@ -18,7 +18,7 @@ function ModalButtonNews(myNews){
                     <Modal.Title>{myNews.myNews.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>{myNews.myNews.text}</p>
+                    <p>{myNews.myNews.description}</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <a href = {myNews.myNews.link} style = {{textDecoration: "none", color: "dodgerblue"}}>Смотреть источник</a>

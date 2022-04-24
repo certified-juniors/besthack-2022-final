@@ -20,7 +20,7 @@ const CurrencyList = (massCurrency) => {
                 <Card.Body>
                   <Card.Title>{myCurrency.title}</Card.Title>
                   <Card.Text>
-                    {myCurrency.text}
+                   Текущий курс: {myCurrency.text}
                   </Card.Text>
                   <ModalButton myCurrency={myCurrency}/>
                 </Card.Body>
