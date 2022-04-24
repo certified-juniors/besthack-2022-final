@@ -9,6 +9,21 @@ const { push, set, ref, get, child, equalTo, query, orderByValue, onValue } = re
 const { logRegister, logLogin } = require('./EntryController');
 
 class UserController {
+    async getUser(req, res) {
+        res.header('Access-Control-Allow-Origin', '*');
+        try {
+            const { token } = req.query;
+            const decoded = jwt.verify(token, secret);
+            const login = decoded.login;
+            const user = (await get(ref(db, 'users/' + login))).val();
+            return res.status(200).json(user);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        }
+    }
     async register(req, res) {
         res.header('Access-Control-Allow-Origin', '*');
         try {

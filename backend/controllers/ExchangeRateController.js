@@ -3,6 +3,8 @@ const { db } = require('../fbapi');
 const { push, set, ref, get, child, equalTo, query, orderByValue, onValue, orderByKey } = require('firebase/database');
 const parser_currency = require('../utils/parser');
 const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+const secret = require('../config').secret;
 
 class ExchangeRateController {
     
@@ -22,7 +24,28 @@ class ExchangeRateController {
             this.updateInterval = snapshot.val() || ExchangeRateController.DEFAULT_UPDATE_INTERVAL;
             this.interval = setInterval(this.updateExchangeRate.bind(this), this.updateInterval);
         });
-        
+    }
+
+    async buyRate(req, res) {
+        try {
+            const { currency, amount, token } = req.query;
+            if (amount <= 0) {
+                res.status(400).json({
+                    message: 'Amount must be greater than 0'
+                });
+            }
+            const decoded = jwt.verify(token, secret);
+            const login = decoded.login;
+            const user = (await get(ref(db, 'users/' + login))).val();
+            if (user.balance["RUB"] < amount / this.lastValues[currency]) {
+                res.status(400).json({
+                    message: 'Not enough money'
+                });
+            }
+            user.balance["RUB"] = user.balance["RUB"] - amount / this.lastValues[currency];
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     async getExchangeRate() {
