@@ -62,13 +62,13 @@ class Register extends React.Component {
                     <Form.Group className="mb-3" >
                         <Form.Label>Введите Логин</Form.Label>
                         <Form.Control id="login" type="login" placeholder="Логин" value={this.state.login}
-                            onChange={this.handleLoginChange} />
+                            onChange={this.handleLoginChange}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3">
                         <Form.Label>Введите Email</Form.Label>
                         <Form.Control id="email" type="email" placeholder="name@example.com" value={this.state.email}
-                            onChange={this.handleEmailChange} />
+                            onChange={this.handleEmailChange}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3">
@@ -76,11 +76,8 @@ class Register extends React.Component {
                         <Form.Control id="password" type="password" placeholder="Пароль" value={this.state.password}
                             onChange={this.handlePasswordChange} />
                     </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Check type="checkbox" label=
-                            "Согласен с условиями пользовательского соглашения" />
-                    </Form.Group>
-                    <Button size="xxl" variant="primary" type="submit" >
+
+                    <Button href = "/" size="xxl" variant="primary" type="submit" >
                         Зарегистрироваться
                     </Button>
                 </Form>

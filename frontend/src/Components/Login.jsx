@@ -50,7 +50,7 @@ class Login extends React.Component {
             <Form.Control type="password" placeholder="Пароль" id='password' onChange={this.handlePasswordChange}/>
           </Form.Group>
 
-          <Button size="xxl" variant="primary" type="submit">
+          <Button href = "/" size="xxl" variant="primary" type="submit">
             Вход
           </Button>
         </Form>

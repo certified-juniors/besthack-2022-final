@@ -14,10 +14,10 @@ const CurrencyList = (massCurrency) => {
           <Col xs sm="4">
             <Container fluid style={{marginTop: '30px', marginLeft: '15px', padding: '15px'}}>
 
-              <Card style={{width: '18rem', height: '10rem'}}>
+              <Card style={{width: '25rem', height: '10rem'}}>
                 <Card.Img variant="top" src={myCurrency.img}/>
                 <Card.Body>
-                  <Card.Title>{myCurrency.title}</Card.Title>
+                  <Card.Title style = {{marginTop: '6px'}}>{myCurrency.title}</Card.Title>
                   <Card.Text>
                    Текущий курс: {myCurrency.text}
                   </Card.Text>
