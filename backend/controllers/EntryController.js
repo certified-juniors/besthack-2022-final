@@ -4,12 +4,12 @@ const { push, set, ref, get, child, equalTo, query, orderByValue, onValue } = re
 
 class EntryController {
     async logLogin(user, req) {
-        const entry = new Entry(new Date().getTime(), req.ip, user.login, Entry.CATEGORY.USER_LOGGED_IN);
+        const entry = new Entry(new Date().getTime(), req.ip, user.login, Entry.CATEGORY.USER_LOGGED_IN, {}) ;
         await set(ref(db, 'entries/' + entry.timestamp), entry);
     }
 
     async logRegister(user, req) {
-        const entry = new Entry(new Date().getTime(), req.ip, user.login, Entry.CATEGORY.USER_CREATED);
+        const entry = new Entry(new Date().getTime(), req.ip, user.login, Entry.CATEGORY.USER_CREATED, {});
         await set(ref(db, 'entries/' + entry.timestamp), entry);
     }
 
