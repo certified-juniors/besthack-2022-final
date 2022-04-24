@@ -5,8 +5,9 @@ import Currency from "./Components/Currency";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Administration from "./Components/Administration"
-import {Route, BrowserRouter, Switch} from 'react-router-dom';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import axios from "axios";
+import { useState, useEffect } from "react";
 
 const myaxios = axios.create({
     baseURL: 'http://127.0.0.1:2001',
@@ -14,8 +15,14 @@ const myaxios = axios.create({
 });
 
 const App = () => {
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src = "//code.jivo.ru/widget/psBWo2fHkp";
+        script.async = true;
+        document.body.appendChild(script);
+    }, [])
     return (
-      /*<Administration/>*/
+        /*<Administration/>*/
         <BrowserRouter>
             <MyNavbar />
             <Switch>
@@ -25,7 +32,7 @@ const App = () => {
                 <Route path="/currency">
                     <Currency />
                 </Route>
-       {/*         <Route path="/profile">
+                {/*         <Route path="/profile">
                     <Profile />
                 </Route>*/}
                 <Route path="/login">
