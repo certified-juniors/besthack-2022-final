@@ -23,7 +23,7 @@ const myNavs = [
 
 const MyNavbar = () => {
     let list_nav = myNavs.map((nav) =>
-        <Nav.Link href={nav.link}>{nav.title}</Nav.Link>
+        <Nav.Link style = {{color : "black"}} href={nav.link}>{nav.title}</Nav.Link>
     )
     const [admin, setAdmin] = useState(false);
     const [token, setToken] = useState(localStorage.getItem('token'));
@@ -71,8 +71,8 @@ const MyNavbar = () => {
                             {list_nav}
                         </Nav>
                     </Navbar.Collapse>
-                    {admin ? <Button href="/Administration" style = {{margin: "10px"}}>Админка</Button> : null}
-                    {token ? <Button style = {{margin: "10px"}} onClick={handleLogout}>Выйти</Button> : <>
+                    {admin ? <Button href="/Administration" style = {{margin: "10px", backgroundColor: "#58a12b", borderColor: "#58a12b"}}>Админка</Button> : null}
+                    {token ? <Button style = {{margin: "10px"}} style = {{backgroundColor: "#b14646", borderColor: "#b14646"}}onClick={handleLogout}>Выйти</Button> : <>
                         <Button style = {{margin: "10px"}} href="/login">Войти</Button>
                         <Button href="/register">Регистрация</Button>
                         </>

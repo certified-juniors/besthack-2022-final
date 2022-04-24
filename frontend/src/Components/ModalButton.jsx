@@ -10,7 +10,7 @@ function ModalButton(myCurrency) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" style = {{backgroundColor: "#58A12BFF", borderColor: "#58A12BFF"}} onClick={handleShow}>
         Купить
       </Button>
 

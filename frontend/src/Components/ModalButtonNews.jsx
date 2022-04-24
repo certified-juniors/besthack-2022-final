@@ -14,8 +14,8 @@ function ModalButtonNews(myNews){
             </Button>
 
             <Modal show = {show} onHide = {handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{myNews.myNews.title}</Modal.Title>
+                <Modal.Header style = {{backgroundColor: "dodgerblue"}} closeButton>
+                    <Modal.Title style = {{color: "white"}}>{myNews.myNews.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>{myNews.myNews.content}</p>
