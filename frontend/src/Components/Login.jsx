@@ -10,6 +10,8 @@ class Login extends React.Component {
     this.state = {
       loginOrEmail: '',
       password: '',
+      message: '',
+      errors: ''
     }
     this.handler = this.handler.bind(this);
     this.handleLoginOrEmailChange = this.handleLoginOrEmailChange.bind(this);
@@ -23,9 +25,15 @@ class Login extends React.Component {
     axios(url, {
       method: 'POST',
     }).then(res => {
-      const token = res.data.token;
-      localStorage.setItem('token', token);
-      window.location.href = '/';
+      if (res.data.token) {
+        const token = res.data.token;
+        localStorage.setItem('token', token);
+        window.location.href = '/';
+      } else {
+        this.setState({ message: res.data.message });
+      }
+    }).catch(err => {
+      this.setState({ message: err.message });
     });
   }
   handleLoginOrEmailChange(event) {
@@ -40,16 +48,17 @@ class Login extends React.Component {
         <h2 className='text-center'>Вход</h2>
         <div className="vstack gap-2 col-md-5 mx-auto">
           <Form onSubmit={this.handler}>
+            <h3>{this.state.message}</h3>
             <div className="col-auto">
-            <Form.Group className="mb-3">
-              <Form.Label>Введите Логин или Email</Form.Label>
-              <Form.Control type="login" placeholder="Логин или почта" id="loginOrEmail" onChange={this.handleLoginOrEmailChange}/>
-            </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Введите Логин или Email</Form.Label>
+                <Form.Control type="login" placeholder="Логин или почта" id="loginOrEmail" onChange={this.handleLoginOrEmailChange} />
+              </Form.Group>
             </div>
             <div className="col-auto">
               <Form.Group className="mb-3">
                 <Form.Label>Введите пароль</Form.Label>
-                <Form.Control type="password" placeholder="Пароль" id='password' onChange={this.handlePasswordChange}/>
+                <Form.Control type="password" placeholder="Пароль" id='password' onChange={this.handlePasswordChange} />
               </Form.Group>
             </div>
             <Button size="xxl" variant="primary" type="submit">

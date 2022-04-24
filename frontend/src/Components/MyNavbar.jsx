@@ -72,7 +72,7 @@ const MyNavbar = () => {
                         </Nav>
                     </Navbar.Collapse>
                     {admin ? <Button href="/Administration" style = {{margin: "10px", backgroundColor: "#58a12b", borderColor: "#58a12b"}}>Админка</Button> : null}
-                    {token ? <Button style = {{margin: "10px"}} style = {{backgroundColor: "#b14646", borderColor: "#b14646"}}onClick={handleLogout}>Выйти</Button> : <>
+                    {token ? <Button style = {{margin: "10px", backgroundColor: "#b14646", borderColor: "#b14646"}} onClick={handleLogout}>Выйти</Button> : <>
                         <Button style = {{margin: "10px"}} href="/login">Войти</Button>
                         <Button href="/register">Регистрация</Button>
                         </>

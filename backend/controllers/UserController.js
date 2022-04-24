@@ -55,6 +55,25 @@ class UserController {
         }
     }
 
+    async unblockUser(req, res) {
+        res.header('Access-Control-Allow-Origin', '*');
+        try {
+            const { token, login } = req.query;
+            const decoded = jwt.verify(token, secret);
+            const user = (await get(ref(db, 'users/' + decoded.login))).val();
+            if (user.role !== User.ROLE.ADMIN) {
+                return res.send({ message: "Недостаточно прав" })
+            }
+            await set(ref(db, 'users/' + login + '/blocked'), false);
+            res.send({ message: "Пользователь разблокирован" });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        }
+    }
+
     async login(req, res) {
         res.setHeader('Access-Control-Allow-Origin', '*');
         try {
@@ -75,7 +94,7 @@ class UserController {
             if (!isPasswordValid) { 
                 set(ref(db, 'users/' + login + "/tries"), user.tries + 1);
                 if (user.tries > 5) {
-                    set(ref(db, 'users/' + login), { blocked: true });
+                    set(ref(db, 'users/' + login + '/blocked'), true );
                     return res.status(400).json({ message: "Пользователь заблокирован" });
                 }
                 return res.status(400).json({ message: "Неверный пароль" })

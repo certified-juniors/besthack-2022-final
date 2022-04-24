@@ -26,7 +26,7 @@ const Administration = () => {
 
     const handleUnblockUser = (e) => {
         e.preventDefault();
-        axios("http://" + config.host + "/unblockUser?id=" + e.target.id + "&token=" + token, {
+        axios("http://" + config.host + "/unblock-user?login=" + e.target.id.value + "&token=" + token, {
             method: "POST",
         }).then(
             res => {
