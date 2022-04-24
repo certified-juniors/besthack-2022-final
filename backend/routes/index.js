@@ -14,7 +14,7 @@ router.route('/').get(async (req, res) => {
 })
 
 router.route('/get_ria').post(async (req, res) => {
-  let result = parser_ria('https://ria.ru/export/rss2/archive/index.xml')
+  let result = await parser_ria('https://ria.ru/export/rss2/archive/index.xml')
   console.log(result)
 
   res.setHeader('Access-Control-Allow-Origin', '*');
