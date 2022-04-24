@@ -42,7 +42,7 @@ class UserController {
 
     async login(req, res) {
         try {
-            const { loginOrEmail, password } = req.body;
+            const { loginOrEmail, password } = req.query;
             const isLogin = loginOrEmail.indexOf('@') === -1;
             let login;
             if (!isLogin) {
