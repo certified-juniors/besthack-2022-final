@@ -4,23 +4,29 @@ const userController = require('../controllers/UserController');
 const exchangeController = require('../controllers/ExchangeRateController')
 const { check } = require("express-validator");
 const [parser_ria, pageContent_parser_ria] = require('../utils/parser_ria');
+const [parser_rbk, pageContent_parser_rbk] = require('../utils/parser_rbk');
 
 router.route('/').get(async (req, res) => {
-  let text = '<h1>Hello!</h1>'
+  let text = '<h1>Hello!</h1>';
   return res
     .status(200)
     .send(`<p>${text}</p>`)
 })
 
-router.route('/get_ria').get(async (req, res) => {
+router.route('/get_ria').post(async (req, res) => {
   let result = parser_ria('https://ria.ru/export/rss2/archive/index.xml')
-  for (let i = 0; i < result.length(); i++) {
-    result[i] = {...result[i], text: await pageContent_parser_ria(result[i].link)}
-  }
+  console.log(result)
 
   return res
-    .status(200)
     .send(result)
+})
+
+router.route('/get_rbk').post(async (req, res) => {
+  let result = await parser_rbk('http://static.feed.rbc.ru/rbc/logical/footer/news.rss')
+  console.log(result)
+
+    return res
+      .send(result)
 })
 
 router.route('/login').post(userController.login);

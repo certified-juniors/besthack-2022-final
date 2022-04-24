@@ -1,7 +1,7 @@
 const ExchangeRate = require('../models/ExchangeRate');
 const { db } = require('../fbapi');
 const { push, set, ref, get, child, equalTo, query, orderByValue, onValue, orderByKey } = require('firebase/database');
-const [parser, parser_currency] = require('../utils/parser');
+const parser_currency = require('../utils/parser');
 const User = require('../models/User');
 
 class ExchangeRateController {
@@ -12,7 +12,6 @@ class ExchangeRateController {
         this.lastValues = {};
         get(child(query(ref(db, 'exchange-rates/'), orderByKey()), '-1')).then(snapshot => {
             if (snapshot.val()) {
-                console.log(snapshot.val());
                 this.lastUpdate = snapshot.val().timestamp;
                 this.lastValues = snapshot.val().values;
             } else {

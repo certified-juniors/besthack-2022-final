@@ -1,7 +1,7 @@
-const request = require('request-promise');
-const cheerio = require('cheerio');
+const request = require("request-promise");
+const cheerio = require("cheerio");
 
-const parser_ria = async (url) => {
+const parser_rbk = async (url) => {
   return new Promise((resolve, reject) => {
     const options = {
       uri: url,
@@ -10,27 +10,25 @@ const parser_ria = async (url) => {
       },
     }
     request(options)
-      .then(function (html) {
+      .then(function(html) {
         let result = []
         let $ = cheerio.load(html, {decodeEntities: false, xmlMode: true})
         $('channel').find('item').each((i, el) => {
           result[i] = {
             title: $(el).find('title').text(),
-            link: $(el).find('link').text(),
-            description: $(el).find('description').text(),
-            date: $(el).find('pubDate').text()
+            link: $(el).find('link').text().split('\n')[0],
+            description: $(el).find('description').text()
           }
         })
-        console.log(result)
         resolve(result)
       })
       .catch(function (err) {
-        reject(err.statusCode)
+        reject(err)
       })
   })
 }
 
-async function pageContent_parser_ria(url) {
+const pageContent_parser_rbk = async (url) => {
   return new Promise((resolve, reject) => {
     const options = {
       uri: url,
@@ -41,7 +39,7 @@ async function pageContent_parser_ria(url) {
     request(options)
       .then(function (html) {
         let $ = cheerio.load(html)
-        let text = $('.article__text').text();
+        let text = $('.article__content').find('p').text();
         text = text.split('.').map((s) => s.trim()).join('. ');
         resolve(text)
       })
@@ -51,4 +49,4 @@ async function pageContent_parser_ria(url) {
   })
 }
 
-module.exports = [parser_ria, pageContent_parser_ria]
+module.exports = [parser_rbk, pageContent_parser_rbk]
