@@ -79,27 +79,7 @@ async function pageContent_parser_ria(url){
   })
 }
 
-const pageContent_parser_vesti = async (url) => {
-  return new Promise((resolve, reject) => {
-    const options = {
-      uri: url,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0'
-      },
-    }
-    request(options)
-      .then(function (html) {
-        let $ = cheerio.load(html)
-        let text = $('.article__text').find('p').text();
-        console.log(text)
-        text = text.split('.').map((s) => s.trim()).join('. ');
-        resolve(text)
-      })
-      .catch(function (err) {
-        reject(err)
-      })
-  })
-}
+
 
 
 module.exports = parser_currency
