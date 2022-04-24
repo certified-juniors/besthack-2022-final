@@ -51,4 +51,4 @@ async function pageContent_parser_ria(url) {
   })
 }
 
-module.exports = [parser_ria, pageContent_parser_ria]
+module.exports = parser_ria

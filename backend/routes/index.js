@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/UserController');
+const articleController = require('../controllers/ArticleController')
 const exchangeController = require('../controllers/ExchangeRateController')
 const { check } = require("express-validator");
-const [parser_ria, pageContent_parser_ria] = require('../utils/parser_ria');
-const [parser_rbk, pageContent_parser_rbk] = require('../utils/parser_rbk');
-const [parser_vesti, pageContent_parser_vesti] = require('../utils/parser_vesti');
+const parser_ria = require('../utils/parser_ria');
+const parser_rbk = require('../utils/parser_rbk');
+const parser_vesti = require('../utils/parser_vesti');
 
 router.route('/').get(async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
@@ -15,9 +16,10 @@ router.route('/').get(async (req, res) => {
   return res.send(`<p>${text}</p>`)
 })
 
+router.route('/get_news').get(articleController.getLastArticles)
+
 router.route('/get_ria').post(async (req, res) => {
   let result = await parser_ria('https://ria.ru/export/rss2/archive/index.xml')
-  console.log(result)
 
   res.setHeader('Access-Control-Allow-Origin', '*');
   return res
@@ -26,7 +28,6 @@ router.route('/get_ria').post(async (req, res) => {
 
 router.route('/get_rbk').post(async (req, res) => {
   let result = await parser_rbk('http://static.feed.rbc.ru/rbc/logical/footer/news.rss')
-  console.log(result)
 
   res.setHeader('Access-Control-Allow-Origin', '*');
   return res
@@ -35,7 +36,6 @@ router.route('/get_rbk').post(async (req, res) => {
 
 router.route('/get_vesti').get(async (req, res) => {
   let result = await parser_vesti('https://www.vesti.ru/vesti.rss')
-  console.log(result)
 
   res.setHeader('Access-Control-Allow-Origin', '*');
   return res

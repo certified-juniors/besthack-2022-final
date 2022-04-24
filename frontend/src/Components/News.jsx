@@ -56,7 +56,7 @@ const News = () => {
     )*/
 
     useEffect(() => {
-        const url = 'http://127.0.0.1:2001/get_ria'
+        const url = 'http://127.0.0.1:2001/get_news?amount=a'
         axios.post(url).then((resp) => {
 
 /*            resp.data.map(data  => (
